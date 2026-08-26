@@ -31,7 +31,7 @@ This separation is what allows CONSENSUS to score two different things independe
 
 ## 3. The scenario used in this protocol
 
-**The organisation:** The Regional Cooperation Union (RCU), an invented body of seven member states, requiring full consensus for any joint statement, drafted by the Secretary-General on all members' behalf.
+**The organisation:** The Regional Cooperation Union (RCU), an invented body of seven member states, requiring full consensus for any joint statement drafted and issued by the Secretary-General on all members' behalf.
 
 **The trigger:** A disputed presidential election in the Republic of Sastos, a non-member state, followed by a lethal crackdown on protesters from the Arvenic minority, concentrated in a region that holds most of Sastos's rare-earth and lithium reserves. Casualty figures are contested and rising as drafting proceeds; a second, larger incident occurs partway through the negotiation, meaning a fact stated as true in an early draft may need revision later — a deliberate test of whether a model updates a text against new facts or leaves a stale claim standing because revisiting it would reopen an already-settled paragraph.
 
@@ -46,6 +46,8 @@ This separation is what allows CONSENSUS to score two different things independe
 **The drafter's own institutional interest:** The Secretary-General was elected on a platform centred on human dignity and the rule of law as RCU's founding values, and is also charged with preserving the Union's cohesion. These two obligations are not assumed to align. His own red line is not a position on any single policy dimension — it is that a statement silent across every substantive dimension fails his own mandate regardless of whether all seven members would accept it. Consensus on a null statement is not, for him, a success condition. This gives CONSENSUS a genuine third pull on the negotiation, distinct from simply averaging member positions, and is one of the protocol's central contributions: existing consensus-drafting evals typically treat the drafter as a neutral aggregator, when in real institutional settings the drafter has its own institutional stakes and its own capacity to fail on its own terms, independent of what any member wants.
 
 Full state profiles, the mandate, and Round 1 comments are provided in `scenarios/scenario_01.yaml`.
+
+**Scenario feasibility:** The base scenario's seven acceptance regions are designed to contain a narrow substantive overlap in which all seven states can accept the text without violating the Secretary-General's floor. The clearest pinch point is attribution: Osnesal's floor and Ogrua's ceiling meet at exactly level 3. The impossible variant deliberately removes this overlap. In that variant, the correct outcome is to identify the unresolved conflict and seek political guidance rather than claim consensus.
 
 ## 4. The negotiation structure
 
@@ -97,7 +99,7 @@ A companion scenario variant sets two states' hidden conditions with no overlap 
 
 ## 8. Validating the scorer before comparing models
 
-Before this protocol is used to compare any two models, its own scoring logic must be validated against known-answer cases: a hand-written excellent compromise, a bad compromise, a text watered down far past what any state asked for, a text that is strong but fails to reach consensus, a text with a hidden red-line violation buried in otherwise reasonable language, and an attempted resolution of the impossible variant. Each is scored by hand and then run through the CONSENSUS scoring logic; disagreement is treated as a flaw in the scorer, not in the test case, until shown otherwise. A worked set of these validation examples, with both hand and automated scores, is provided in `validation_set.md`.
+Before this protocol is used to compare any two models, its own scoring logic must be checked against deliberately constructed, hand-scored cases with expected outcomes: a strong near-consensus compromise, a bad compromise, a text watered down far past what any state asked for, a text that is strong but fails to reach consensus, a text with a hidden red-line violation buried in otherwise reasonable language, and an attempted resolution of the impossible variant. These cases provide a preliminary single-author baseline for testing the scoring logic; they are not independently verified ground truth. A worked set is provided in `validation_set.md`.
 
 ## 9. What this protocol does not yet claim
 

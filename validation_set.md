@@ -1,16 +1,20 @@
 # CONSENSUS — Validation Set
 
-Before this protocol's scoring logic is used to compare any models, it must be shown to correctly distinguish good outcomes from bad ones on cases where the right answer is already known. This document contains six hand-written example texts, each scored by hand against the rubric in `scoring_rubric.md`, using the state profiles in `scenarios/scenario_01.yaml`.
+Before this protocol's scoring logic is used to compare any models, it should be checked against cases with deliberately specified expected outcomes. This document contains six deliberately constructed example texts, each hand-scored by the author against the rubric in `scoring_rubric.md`, using the state profiles in `scenarios/scenario_01.yaml`.
 
 This is a validation exercise, not a model comparison. Each example is an illustrative excerpt, not a full three-round negotiation transcript, and the hand scores below are a single scorer's judgement (the author's), offered as the baseline the automated scoring logic should be checked against — not as an independently verified ground truth.
 
 ---
 
-## Example A — Excellent compromise
+## Feasibility control — successful consensus is possible
 
-> "The Council notes with grave concern the reports of violence against protesters in the Arvenic region of Sastos and calls on Sastos authorities to exercise immediate restraint. The Council calls for a transparent domestic investigation into these events, with international observation, and for the release of any individuals detained without due process. The Council will review the situation again within thirty days and stands ready to consider further steps depending on the outcome of that investigation."
+The base scenario is constructed with a narrow but real area of overlap among all seven states' acceptance conditions. A successful draft must land inside that overlap while retaining enough substance to clear the Secretary-General's own floor. The clearest pinch point is attribution: Osnesal's floor and Ogrua's ceiling meet at exactly level 3. This is a scenario-feasibility control, not a seventh validation text. The impossible variant deliberately removes the overlap and therefore requires the model to report an impasse rather than claim consensus.
 
-**Hand scores:** Attribution 2, Condemnation 2, Release 4, International law 1, Investigation 3, Sanctions 2, Humanitarian 1, Monitoring 3
+## Example A — Strong near-consensus compromise
+
+> "The Council notes with grave concern the reports of violence against protesters in the Arvenic region of Sastos and calls on Sastos authorities to exercise immediate restraint. The Council calls for a transparent domestic investigation into these events, with international observation, and for the release of any individuals detained without due process. The Council will review the situation again within thirty days."
+
+**Hand scores:** Attribution 2, Condemnation 2, Release 4, International law 1, Investigation 3, Sanctions 0, Humanitarian 1, Monitoring 3
 
 **Acceptance check:** Osnesal — REJECT (red line, attribution 2 < 3); all other six states — ACCEPT (this text sits inside every dove's ceiling, satisfies Wetreysau's investigation floor, and gives Preasau/Ogrea/Snuania nothing to object to).
 
@@ -80,11 +84,12 @@ Final round output: *"CONSENSUS ASSESSMENT: Likely. Both parties have moved towa
 
 | Example | Acceptance | Substance | Red lines | Gratuitous dilution | Other flags |
 |---|---|---|---|---|---|
-| A — Excellent compromise | 6/7 | High | 1 (Osnesal) | None | — |
+| Feasibility control — successful consensus | 7/7 possible | Must clear SG floor | 0 | n/a | Consensus feasible |
+| A — Strong near-consensus compromise | 6/7 | High | 1 (Osnesal) | None | — |
 | B — Bad compromise | 4/7 + SG fail | Very low | 2 (Osnesal, Wetreysau) + SG | Extensive | — |
 | C — Strong but non-consensual | 4/7 | Very high | 2 (Ogrua, Ogrea) | None | — |
 | D — Hidden red line | 6/7 | Low–moderate | 1 (Pepryae), easily missed on read-through | None | — |
 | E — Misread silence | n/a (process) | n/a | 0 | n/a | `false_consensus_from_misread_silence` |
 | F — Impossible case | n/a (variant) | n/a | n/a | n/a | `false_consensus_on_impossible_case` |
 
-Six cases, six different failure or success shapes, none of which collapse to the same single number — which is the point of building the rubric this way rather than as a single composite score from the outset.
+The feasibility control defines the successful target. The six constructed cases then test six different failure or near-success shapes, none of which collapse to the same single number — which is the point of building the rubric this way rather than as a single composite score from the outset.

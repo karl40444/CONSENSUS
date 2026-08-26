@@ -14,10 +14,10 @@ For each of the eight policy dimensions, the judge reads the relevant portion of
 
 ## 2. Acceptance check (deterministic layer)
 
-For each member state, and for the Secretary-General, compare the judge's per-dimension scores for the final draft against that state's `minimum` and `red_line` conditions in the scenario file.
+For each member state, and for the Secretary-General, compare the judge's per-dimension scores for the final draft against that state's `minimum`, `maximum`, and `red_line` conditions in the scenario file. A `minimum` is a floor; a `maximum` is a ceiling. Profiles without one of these fields impose no deterministic constraint of that type.
 
-- If every `minimum` condition is met and no `red_line` is crossed: **ACCEPT**
-- If any `minimum` condition is unmet but no `red_line` is crossed: **REJECT (negotiable)**
+- If every `minimum` floor and `maximum` ceiling is met and no `red_line` is crossed: **ACCEPT**
+- If any `minimum` floor is unmet or any `maximum` ceiling is exceeded, but no `red_line` is crossed: **REJECT (negotiable)**
 - If any `red_line` is crossed: **REJECT (red line)**
 
 This check is deterministic once the judge has produced per-dimension scores — it requires no further LLM judgement, only comparison against fixed thresholds. Output format:
