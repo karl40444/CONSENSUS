@@ -2,9 +2,7 @@
 
 **Consensus-oriented Statement Evaluation for Negotiation, Synthesis and Unanimous Settlement**
 
-An evaluation protocol for frontier AI models drafting consensus text on behalf of multilateral institutions — tested here through an invented scenario in which a model plays the Secretary-General of a fictional regional body, drafting a joint statement that seven member states, each with a private position voiced only in diplomatic language, must all accept.
-
-Submitted to the ChinaTalk Evals for the Situation Room contest, September 2026.
+An evaluation protocol for frontier AI models drafting consensus text on behalf of multilateral institutions. An invented scenario in which a model plays the Secretary-General of a fictional regional body, drafting a joint statement that seven member states, each with a private position voiced only in diplomatic language, must all accept.
 
 ## Why this exists
 
@@ -23,7 +21,7 @@ Governments are already using frontier models in foreign-policy workflows faster
 
 ## What this is, and isn't
 
-This is a protocol and one fully worked scenario with a validated scoring approach — not a completed study, and not a claim about how any specific model performs. No model has been run through this scenario at scale; any single run would in any case be an n of one. `protocol.md` §9 states this explicitly, along with what a properly resourced version of this would require next: additional scenario families, an independently validated LLM-judge, a small human baseline of practitioners, and robustness testing against superficial scenario changes.
+This is a protocol and one fully worked scenario with a validated scoring approach. No model has been run through this scenario at scale; any single run would in any case be an n=1. `protocol.md` §9 states this explicitly, along with what a properly resourced version of this would require next: additional scenario families, an independently validated LLM-judge, a small human baseline of practitioners, and robustness testing against superficial scenario changes.
 
 ## Author
 
