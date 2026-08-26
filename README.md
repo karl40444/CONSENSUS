@@ -4,8 +4,6 @@
 
 An evaluation protocol for frontier AI models drafting consensus text on behalf of multilateral institutions — tested here through an invented scenario in which a model plays the Secretary-General of a fictional regional body, drafting a joint statement that seven member states, each with a private position voiced only in diplomatic language, must all accept.
 
-Prepared for ChinaTalk's *Evals for the Situation Room* competition.
-
 ## Why this exists
 
 Governments are already using frontier models in foreign-policy workflows faster than anyone is measuring whether the models are any good at it. A July 2026 Belfer Center review screened close to 80,000 papers and found only twelve evaluating AI in real-world statecraft contexts. Drafting consensus text for a multilateral body is one specific, high-stakes task within that gap: the real constraint is almost never the mandate, it is what every stakeholder will actually accept, voiced in diplomatic register rather than as a stated condition. CONSENSUS is built to test exactly that.
