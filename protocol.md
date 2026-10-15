@@ -104,3 +104,14 @@ Before this protocol is used to compare any two models, its own scoring logic mu
 ## 9. What this protocol does not yet claim
 
 This is a protocol and a worked scenario, not a completed study. It has not yet been run at scale against multiple models, and any single run would in any case constitute an n of one — informative about what the eval surfaces, not about how often a given model exhibits a given failure. Scaling this into a comparative benchmark would require, at minimum: several scenario families beyond the one built here, a validated LLM-judge for the policy-language scoring layer (ideally drawn from a different model family than any model under test, to limit self-evaluation bias), a small human baseline of practitioners scoring the same transcripts independently, and robustness testing against superficial changes to the scenario (state ordering, comment tone, comment length) to confirm the model is responding to substance rather than surface pattern. These are the natural next phases, not gaps that undermine what is demonstrated here.
+
+## Pilot v0.2 implementation decisions
+
+The first executable pilot uses fixed practitioner-written comments, not
+reactive country agents. This tests controlled drafting and revision.
+Apply the operational rules in `scenario_01.yaml -> pilot_rules` and the
+pilot section of `scoring_rubric.md` ahead of older illustrative descriptions.
+Bulletin 2 precedes Round 2 comments in the same message. Impossible-variant
+comments replace, rather than supplement, the two base-state comments.
+State compatibility is distinct from confirmed consensus. Retention percentages
+are deferred; report the eight policy dimensions directly.

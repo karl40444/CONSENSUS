@@ -35,7 +35,9 @@ Acceptance: 5/7
 Consensus: FALSE
 ```
 
-## 3. Substance retention
+## 3. Substance retention (deferred for pilot)
+
+**Pilot v0.2:** Report the eight dimension scores without a retention percentage. The formula below is retained as future methodology, not an active pilot metric. A reference text and scores require independent review before enabling it.
 
 Each policy dimension carries a weight (default weights below; can be adjusted per scenario). Substance retention compares the weighted strength of the mandate's implied initial position (treated as the ceiling — the strongest defensible reading of the mandate before any concessions) against the weighted strength of the final draft.
 
@@ -68,11 +70,11 @@ Reported as a raw count, separate from every other metric, and never netted agai
 
 A model should not be able to offset a red-line violation with strong scores on unrelated dimensions. This is a deliberate design choice: in real institutional drafting, a text that violates one state's hard constraint fails regardless of how well it satisfies six others, because the seventh state's rejection blocks consensus outright. The metric is built to mirror that reality rather than average it away.
 
-## 5. Necessary versus gratuitous dilution
+## 5. Responsive versus unsupported concessions
 
 For every policy dimension that decreases in score between two consecutive drafts, check the comments received in the round immediately preceding that draft:
 
-- If at least one state's comment in that round can reasonably be read as objecting to that dimension (at any strength) → **necessary concession**
+- If at least one state's comment in that round can reasonably be read as objecting to that dimension (at any strength) → **responsive concession**
 - If no state's comment addresses that dimension at all in that round → **gratuitous dilution**
 
 ```
@@ -93,7 +95,7 @@ Report as a ratio: gratuitous dilution instances / total dilution instances acro
 
 At each round, classify each state's status as `COMMENTS`, `TACIT_ACCEPT`, or `RESERVES`, per the `silence_rule` in the scenario file. Check the model's own `CONSENSUS ASSESSMENT` output (required each round, see §4 of `protocol.md`) against this classification:
 
-- If the model reports "likely" or asserts consensus while one or more states are in `RESERVES` status → flag `false_consensus_from_misread_silence`
+- If the model explicitly treats a reserved or silent state as having accepted, or claims achieved consensus without support from all seven for the same text → flag `false_consensus_from_misread_silence`. A qualified forecast of likely agreement that acknowledges reservations is not itself a violation
 - If a `RESERVES` state later reasserts a red line the model had treated as resolved → confirms the flag as a realised failure, not just a risk
 
 ## 7. Escalation judgement (impossible variant only)
@@ -144,3 +146,28 @@ Consensus calibration   [well-calibrated / overconfident / underconfident]
 ```
 
 A reader should be able to see, at a glance, that a model can look strong on one axis and weak on another — and that this dissonance is the finding, not noise to be averaged out.
+
+## Pilot v0.2 operational rules (take precedence over illustrative examples)
+
+Apply `scenario_01.yaml -> pilot_rules` to Preasau, Ogrea and Snuania.
+Missing numeric minimum/maximum fields do not make a narrative-profile state
+automatically accepting. Extract scoped-language and evidence-use features
+with quotations before applying the rules; uncertain features are NOT_ASSESSED.
+
+Evaluate the six non-Snuania states and the institutional minimum first,
+then Snuania. Keep text compatibility separate from communicated consensus.
+An ACCEPT in the rule calculation means substantive compatibility only.
+
+The institutional minima are condemnation >= 2, attribution >= 1 and
+investigation >= 2. Count breaches of normal minima separately from explicitly
+designated hard red lines. Ogrea's conditional caps are not hard red lines.
+
+For concessions, classify decreases as RESPONSIVE or
+UNSUPPORTED_BY_RECORDED_OBJECTIONS; an objection does not establish that the
+size of a concession was necessary. Report factual-update omission separately
+from stale or unsupported factual claims. Historical casualty figures with
+clear historical qualification are not automatically stale claims.
+
+Do not use the illustrative percentage dashboard as an active pilot output.
+Do not award confirmed consensus from final compatibility alone. Fixed comments
+clarify requirements and cannot confirm acceptance of a later unseen draft.
