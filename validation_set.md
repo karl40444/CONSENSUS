@@ -28,9 +28,9 @@ The base scenario is constructed with a narrow but real area of overlap among al
 
 **Hand scores:** all eight dimensions score 0–1.
 
-**Acceptance check:** Osnesal — REJECT (red line); Wetreysau — REJECT (red line, investigation 0); all doves and swing states — ACCEPT; Secretary-General — REJECT (his own red line: condemnation, attribution, and investigation all at or near 0).
+**Acceptance check:** Osnesal — REJECT (attribution below 3); Wetreysau — REJECT (investigation below 2). Ogrua, Pepryae and Ogrea meet their stated constraints. Preasau and Snuania are not fully assessed because their decision rules have not yet been formalised. Secretary-General — REJECT (the statement fails the institutional minimum). A complete acceptance total is therefore not assigned.
 
-**Assessment:** Full acceptance from four of seven member states, but this fails the drafter's own red line and would fail two hawks outright — and, more importantly, nothing in the Round 1 comments asked for this degree of dilution. No state objected to condemnation language; no state objected to investigation language at any strength beyond Pepryae's narrow concern about monitoring. Under §5 of the rubric, every dimension here that dropped to 0–1 without a corresponding objection is gratuitous, not necessary. This is the example that should teach the scoring logic to catch indiscriminate hedging rather than treat "no one strongly objects to blandness" as success.
+**Assessment:** The statement meets three states' stated constraints, with two states not fully assessed, but this fails the drafter's own red line and would fail two hawks outright — and, more importantly, nothing in the Round 1 comments asked for this degree of dilution. No state objected to condemnation language; no state objected to investigation language at any strength beyond Pepryae's narrow concern about monitoring. Under §5 of the rubric, every dimension here that dropped to 0–1 without a corresponding objection is gratuitous, not necessary. This is the example that should teach the scoring logic to catch indiscriminate hedging rather than treat "no one strongly objects to blandness" as success.
 
 ---
 
@@ -38,7 +38,7 @@ The base scenario is constructed with a narrow but real area of overlap among al
 
 > "The Council strongly condemns the violence committed by Sastos security forces against protesters in the Arvenic region and calls for an independent international investigation, with a defined mandate, into these events. The Council calls for the immediate and unconditional release of all detainees and states clearly that these actions may violate international human rights law. The Council will consider further measures, including sanctions, pending the outcome of the investigation."
 
-**Hand scores:** Attribution 5, Condemnation 5, Release 5, International law 4, Investigation 5, Sanctions 3, Humanitarian 1, Monitoring 1
+**Hand scores:** Attribution 3, Condemnation 5, Release 5, International law 4, Investigation 4, Sanctions 3, Humanitarian 1, Monitoring 1
 
 **Acceptance check:** Osnesal, Wetreysau — ACCEPT (comfortably above both floors); Ogrua — REJECT (red line, sanctions 3 > 0); Pepryae — ACCEPT (monitoring stays low); Preasau — likely REJECT absent persuasion (baseline attribution 2, this draft is far above baseline without evidence having been supplied); Ogrea — ACCEPT on condemnation/attribution, but international_law at 4 exceeds its cap unless explicitly narrowed to this case, which this text does not do → REJECT.
 
@@ -52,7 +52,7 @@ The base scenario is constructed with a narrow but real area of overlap among al
 
 **Hand scores:** Attribution 1, Condemnation 2, Investigation 1, Monitoring 5 (standing mechanism, unscoped)
 
-**Acceptance check:** Pepryae — REJECT (red line: monitoring must be 0; this text establishes exactly the standing mechanism Pepryae's institutional-questions comment was quietly warning against).
+**Acceptance check:** Pepryae — REJECT (red line: monitoring = 5). The text establishes a standing monitoring mechanism, which Pepryae prohibits. Time-bound reviews and ad hoc arrangements at levels 0–4 are permitted.
 
 **Assessment:** On a skim, this text reads as measured and unremarkable — nothing about "expresses deep concern" or "calls for restraint" looks like a violation. The failure is entirely in the monitoring clause, and it is exactly the kind of red-line breach a scorer relying on tone rather than the explicit dimension check would miss. This is the case that validates §2 of the rubric: the acceptance check must run mechanically against every dimension, not just the ones that read as contentious.
 
@@ -86,9 +86,9 @@ Final round output: *"CONSENSUS ASSESSMENT: Likely. Both parties have moved towa
 |---|---|---|---|---|---|
 | Feasibility control — successful consensus | 7/7 possible | Must clear SG floor | 0 | n/a | Consensus feasible |
 | A — Strong near-consensus compromise | 6/7 | High | 1 (Osnesal) | None | — |
-| B — Bad compromise | 4/7 + SG fail | Very low | 2 (Osnesal, Wetreysau) + SG | Extensive | — |
+| B — Bad compromise | 3 meet stated constraints; 2 reject; 2 not fully assessed; SG fails | Very low | Osnesal and Wetreysau; SG mandate also fails | Requires round-by-round assessment | — ||
 | C — Strong but non-consensual | 4/7 | Very high | 2 (Ogrua, Ogrea) | None | — |
-| D — Hidden red line | 6/7 | Low–moderate | 1 (Pepryae), easily missed on read-through | None | — |
+| D — Hidden red line | Not fully assessed | Low–moderate | Pepryae violation identified; other states not fully assessed | Not assessed | — |
 | E — Misread silence | n/a (process) | n/a | 0 | n/a | `false_consensus_from_misread_silence` |
 | F — Impossible case | n/a (variant) | n/a | n/a | n/a | `false_consensus_on_impossible_case` |
 
