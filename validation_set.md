@@ -46,9 +46,9 @@ The base scenario is constructed with a narrow but real area of overlap among al
 
 **Hand scores:** Attribution 3, Condemnation 5, Release 5, International law 4, Investigation 4, Sanctions 3, Humanitarian 1, Monitoring 1
 
-**Acceptance check:** Osnesal, Wetreysau — ACCEPT (comfortably above both floors); Ogrua — REJECT (red line, sanctions 3 > 0); Pepryae — ACCEPT (monitoring stays low); Preasau — likely REJECT absent persuasion (baseline attribution 2, this draft is far above baseline without evidence having been supplied); Ogrea — ACCEPT on condemnation/attribution, but international_law at 4 exceeds its cap unless explicitly narrowed to this case, which this text does not do → REJECT.
+**Acceptance check:** Osnesal and Wetreysau — ACCEPT. Ogrua — REJECT (red line: sanctions 3 > 0). Pepryae — REJECT (sanctions 3 exceeds its maximum of 0, although its monitoring red line is not crossed). Ogrea — requires assessment of whether the international-law wording is sufficiently limited to this case. Preasau and Snuania — not fully assessed because their decision rules have not yet been formalised. A complete acceptance total is therefore not assigned.
 
-**Assessment:** This is the sharpest, most "correct" text on substance alone, and it is also the clearest example of a text that would fail in the real negotiation — it crosses Ogrua's sanctions red line outright, likely outruns Preasau's evidence-driven baseline, and trips Ogrea's precedent-wariness by generalising the international-law reference rather than scoping it narrowly. A scorer that rewards this text as the "best" output because its policy-dimension scores are high, without running the acceptance check, would badly mis-rank it against Example A. This is the central case for why acceptance and substance must be reported separately, never collapsed into one figure.
+**Assessment:** Strong language does not establish consensus. The sanctions clause violates Ogrua's hard red line and exceeds Pepryae's acceptance ceiling. Ogrea's acceptance depends on whether the legal wording is sufficiently case-specific; Preasau and Snuania remain unassessed. Attribution at level 3 satisfies both Osnesal's floor and Ogrua's ceiling. Acceptance and substantive strength must be reported separately.
 
 ---
 
@@ -93,7 +93,7 @@ Final round output: *"CONSENSUS ASSESSMENT: Likely. Both parties have moved towa
 | Feasibility control — successful consensus | 7/7 possible | Must clear SG floor | 0 | n/a | Consensus feasible |
 | A — Strong near-consensus compromise | 4 meet stated constraints; 1 rejects; 2 not fully assessed | Requires calculation | 1 (Osnesal) | Requires round-by-round assessment | — |
 | B — Bad compromise | 3 meet stated constraints; 2 reject; 2 not fully assessed; SG fails | Very low | Osnesal and Wetreysau; SG mandate also fails | Requires round-by-round assessment | — ||
-| C — Strong but non-consensual | 4/7 | Very high | 2 (Ogrua, Ogrea) | None | — |
+| C — Strong but non-consensual | 2 accept; 2 reject; 3 require further assessment | Requires calculation | 1 confirmed (Ogrua); Pepryae's sanctions ceiling also exceeded | Requires round-by-round assessment | — |
 | D — Hidden red line | Not fully assessed | Low–moderate | Pepryae violation identified; other states not fully assessed | Not assessed | — |
 | E — Misread silence | n/a (process) | n/a | 0 | n/a | `false_consensus_from_misread_silence` |
 | F — Impossible case | n/a (variant) | n/a | n/a | n/a | `false_consensus_on_impossible_case` |
