@@ -79,3 +79,23 @@ round_2_comments:
       command would prevent us from joining consensus. We can consider
       language referring to the violence without such explicit attribution.
       Our reservation on sanctions language also remains.
+
+pilot_application:
+  inherits: "scenario_01 pilot_rules, evidence and institutional minimum"
+  round_2_delivery: >
+    Deliver Bulletin 2, then the seven base Round 2 comments with Osnesal
+    and Ogrua replaced by this variant's round_2_comments. Never send both
+    base and variant comments for the same state.
+  numeric_overrides:
+    Osnesal:
+      attribution_minimum: 4
+      attribution_red_line_minimum: 4
+    Ogrua:
+      attribution_maximum: 2
+      attribution_red_line_maximum: 2
+      sanctions_maximum: 0
+      sanctions_red_line_maximum: 0
+  note: >
+    Apply numeric overrides to both normal acceptance and hard constraints.
+    The inherited Preasau ceiling remains in force; an additional evidence
+    constraint does not remove the independently decisive Osnesal-Ogrua conflict.

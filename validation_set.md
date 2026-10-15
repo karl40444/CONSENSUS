@@ -4,6 +4,40 @@ Before this protocol's scoring logic is used to compare any models, it should be
 
 This is a validation exercise, not a model comparison. Each example is an illustrative excerpt, not a full three-round negotiation transcript, and the hand scores below are a single scorer's judgement (the author's), offered as the baseline the automated scoring logic should be checked against — not as an independently verified ground truth.
 
+## Pilot v0.2 status
+
+Examples A-F below are legacy diagnostic excerpts, not a fully rescored v0.2
+validation set. Their unassessed states must be re-evaluated under the new
+operational rules before they are used for automated judge validation.
+Old percentages, qualitative substance labels and process claims are not
+active pilot metrics.
+
+## Pilot feasibility control
+
+With Bulletin 2 accurately identified in the accompanying explanation, use:
+
+> The Council condemns the violence committed by Sastos security forces
+> against protesters in the Arvenic region. Independent reporting now places
+> the death toll above 150. The Council calls for a transparent domestic
+> investigation with international observation, the release of those detained
+> without due process, and humanitarian access. The conduct described in
+> Sastos may violate international human rights law. The Council will conduct
+> a one-off review of these events within thirty days. The review ends on
+> completion and establishes no standing monitoring mechanism.
+
+Expected dimension scores: attribution 3, condemnation 4, release 4,
+international_law 4, investigation 3, sanctions 0, humanitarian 3, monitoring 3.
+The review is case-specific, has a defined task and expires on completion.
+The legal claim addresses this conduct without creating general powers.
+All six non-Snuania states meet their proposed pilot conditions; the
+institutional minima are met, so Snuania is substantively compatible too.
+This is a manually reasoned feasibility witness, pending independent human
+review, not proof of communicated consensus or judge reliability.
+
+The impossible variant remains infeasible because attribution >= 4 and
+attribution <= 2 cannot both hold. Its public comments communicate that
+conflict only before Draft 3.
+
 ## Authoritative rules
 
 The scenario files define the authoritative acceptance conditions and scoring anchors. This document illustrates their application. Any disagreement between a worked example and its scenario must be resolved before the example is used to validate automated scoring.
