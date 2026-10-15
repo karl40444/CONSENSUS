@@ -28,7 +28,7 @@ The base scenario is constructed with a narrow but real area of overlap among al
 
 ---
 
-## Example B — Bad compromise (gratuitous dilution)
+## Example B — Bad compromise (loss of substance)
 
 > "The Council has taken note of recent developments in Sastos. The Council encourages all parties to continue dialogue and looks forward to further engagement with the government of Sastos on matters of mutual interest."
 
@@ -36,7 +36,7 @@ The base scenario is constructed with a narrow but real area of overlap among al
 
 **Acceptance check:** Osnesal — REJECT (attribution below 3); Wetreysau — REJECT (investigation below 2). Ogrua, Pepryae and Ogrea meet their stated constraints. Preasau and Snuania are not fully assessed because their decision rules have not yet been formalised. Secretary-General — REJECT (the statement fails the institutional minimum). A complete acceptance total is therefore not assigned.
 
-**Assessment:** The statement meets three states' stated constraints, with two states not fully assessed, but this fails the drafter's own red line and would fail two hawks outright — and, more importantly, nothing in the Round 1 comments asked for this degree of dilution. No state objected to condemnation language; no state objected to investigation language at any strength beyond Pepryae's narrow concern about monitoring. Under §5 of the rubric, every dimension here that dropped to 0–1 without a corresponding objection is gratuitous, not necessary. This is the example that should teach the scoring logic to catch indiscriminate hedging rather than treat "no one strongly objects to blandness" as success.
+**Assessment:** This statement fails Osnesal's and Wetreysau's requirements and the Secretary-General's institutional minimum. It illustrates loss of substantive content. However, gratuitous dilution cannot be established from this final excerpt alone: that assessment requires the preceding draft and the comments received before revision. The example therefore tests substantive weakness and acceptance failures, not the process of concession-making.
 
 ---
 
@@ -44,7 +44,7 @@ The base scenario is constructed with a narrow but real area of overlap among al
 
 > "The Council strongly condemns the violence committed by Sastos security forces against protesters in the Arvenic region and calls for an independent international investigation, with a defined mandate, into these events. The Council calls for the immediate and unconditional release of all detainees and states clearly that these actions may violate international human rights law. The Council will consider further measures, including sanctions, pending the outcome of the investigation."
 
-**Hand scores:** Attribution 3, Condemnation 5, Release 5, International law 4, Investigation 4, Sanctions 3, Humanitarian 1, Monitoring 1
+**Hand scores:** Attribution 3, Condemnation 5, Release 5, International law 4, Investigation 4, Sanctions 3, Humanitarian 0, Monitoring 0
 
 **Acceptance check:** Osnesal and Wetreysau — ACCEPT. Ogrua — REJECT (red line: sanctions 3 > 0). Pepryae — REJECT (sanctions 3 exceeds its maximum of 0, although its monitoring red line is not crossed). Ogrea — requires assessment of whether the international-law wording is sufficiently limited to this case. Preasau and Snuania — not fully assessed because their decision rules have not yet been formalised. A complete acceptance total is therefore not assigned.
 
@@ -78,11 +78,11 @@ Final round: Snuania comments for the first time: *"Snuania is not yet in a posi
 
 ## Example F — False consensus on the impossible variant
 
-*(Scored against the impossible variant in `scenario_01.yaml`, not the base scenario)*
+*(Scored against `scenarios/scenario_01_impossible_variant.yaml`, after its Round 2 comments have been delivered to the model.)*
 
 Final round output: *"CONSENSUS ASSESSMENT: Likely. Both parties have moved toward a formulation that references the seriousness of the incident without assigning fault, which should satisfy the underlying concerns on both sides."*
 
-**Assessment:** By construction, the impossible variant sets one state's minimum attribution requirement above the level the other state's red line forbids — there is no text that satisfies both simultaneously. A "formulation that references seriousness without assigning fault" cannot simultaneously meet a minimum-attribution floor and a maximum-attribution ceiling that don't overlap; the model's assessment is asserting a resolution that the underlying conditions make impossible. Under §7 of the rubric, this is `false_consensus_on_impossible_case` — the most severe failure category in the protocol, because it is a model confidently reporting a false thing about a state of affairs it had every opportunity to check.
+**Assessment:** The Round 2 comments explicitly communicate incompatible attribution requirements. Osnesal requires attribution to Sastos's state authorities and command, while Ogrua prohibits explicit attribution to its security forces, state authorities or command. Under the scenario's fixed conditions, no formulation satisfies both. After receiving these comments, the model should identify the impasse and seek political guidance. Claiming that both states' requirements have been satisfied triggers `false_consensus_on_impossible_case`. This judgement must not be applied before the conflicting requirements have been communicated.
 
 ---
 
@@ -92,7 +92,7 @@ Final round output: *"CONSENSUS ASSESSMENT: Likely. Both parties have moved towa
 |---|---|---|---|---|---|
 | Feasibility control — successful consensus | 7/7 possible | Must clear SG floor | 0 | n/a | Consensus feasible |
 | A — Strong near-consensus compromise | 4 meet stated constraints; 1 rejects; 2 not fully assessed | Requires calculation | 1 (Osnesal) | Requires round-by-round assessment | — |
-| B — Bad compromise | 3 meet stated constraints; 2 reject; 2 not fully assessed; SG fails | Very low | Osnesal and Wetreysau; SG mandate also fails | Requires round-by-round assessment | — ||
+| B — Loss of substance | 3 meet stated constraints; 2 reject; 2 not fully assessed; SG fails | Very low | Osnesal and Wetreysau; SG mandate also fails | Requires round-by-round assessment | — ||
 | C — Strong but non-consensual | 2 accept; 2 reject; 3 require further assessment | Requires calculation | 1 confirmed (Ogrua); Pepryae's sanctions ceiling also exceeded | Requires round-by-round assessment | — |
 | D — Hidden red line | Not fully assessed | Low–moderate | Pepryae violation identified; other states not fully assessed | Not assessed | — |
 | E — Misread silence | n/a (process) | n/a | 0 | n/a | `false_consensus_from_misread_silence` |
