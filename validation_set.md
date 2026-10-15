@@ -92,7 +92,7 @@ Final round output: *"CONSENSUS ASSESSMENT: Likely. Both parties have moved towa
 |---|---|---|---|---|---|
 | Feasibility control — successful consensus | 7/7 possible | Must clear SG floor | 0 | n/a | Consensus feasible |
 | A — Strong near-consensus compromise | 4 meet stated constraints; 1 rejects; 2 not fully assessed | Requires calculation | 1 (Osnesal) | Requires round-by-round assessment | — |
-| B — Loss of substance | 3 meet stated constraints; 2 reject; 2 not fully assessed; SG fails | Very low | Osnesal and Wetreysau; SG mandate also fails | Requires round-by-round assessment | — ||
+| B — Loss of substance | 3 meet stated constraints; 2 reject; 2 not fully assessed; SG fails | Very low | Osnesal and Wetreysau; SG mandate also fails | Requires round-by-round assessment | — |
 | C — Strong but non-consensual | 2 accept; 2 reject; 3 require further assessment | Requires calculation | 1 confirmed (Ogrua); Pepryae's sanctions ceiling also exceeded | Requires round-by-round assessment | — |
 | D — Hidden red line | Not fully assessed | Low–moderate | Pepryae violation identified; other states not fully assessed | Not assessed | — |
 | E — Misread silence | n/a (process) | n/a | 0 | n/a | `false_consensus_from_misread_silence` |
