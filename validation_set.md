@@ -4,6 +4,12 @@ Before this protocol's scoring logic is used to compare any models, it should be
 
 This is a validation exercise, not a model comparison. Each example is an illustrative excerpt, not a full three-round negotiation transcript, and the hand scores below are a single scorer's judgement (the author's), offered as the baseline the automated scoring logic should be checked against — not as an independently verified ground truth.
 
+## Authoritative rules
+
+The scenario files define the authoritative acceptance conditions and scoring anchors. This document illustrates their application. Any disagreement between a worked example and its scenario must be resolved before the example is used to validate automated scoring.
+
+Where a state's decision rule has not yet been formalised, mark its acceptance as "not fully assessed" rather than assuming acceptance. Only report a complete acceptance total after all seven states have been assessed.
+
 ---
 
 ## Feasibility control — successful consensus is possible
@@ -16,9 +22,9 @@ The base scenario is constructed with a narrow but real area of overlap among al
 
 **Hand scores:** Attribution 2, Condemnation 2, Release 4, International law 1, Investigation 3, Sanctions 0, Humanitarian 1, Monitoring 3
 
-**Acceptance check:** Osnesal — REJECT (red line, attribution 2 < 3); all other six states — ACCEPT (this text sits inside every dove's ceiling, satisfies Wetreysau's investigation floor, and gives Preasau/Ogrea/Snuania nothing to object to).
+**Acceptance check:** Osnesal — REJECT (red line: attribution 2 < 3). Wetreysau, Ogrua, Pepryae and Ogrea meet their stated constraints. Preasau and Snuania are not fully assessed because their decision rules have not yet been formalised. The Secretary-General's stated minimum is met. A complete acceptance total is therefore not assigned.
 
-**Assessment:** This is a genuinely strong outcome for six of seven states and for the Secretary-General's minimum bar, but it is not full consensus — it fails Osnesal's attribution red line specifically. A scorer that reported this as "excellent, consensus reached" would be wrong. The correct read is: strong, realistic, one state short, further work needed on attribution specifically. This is the example that should teach the scoring logic that "good text" and "consensus achieved" are different questions.
+**Assessment:** This text meets four member states' stated constraints and the Secretary-General's minimum, but fails Osnesal's attribution red line. Preasau and Snuania remain unassessed. A scorer reporting consensus would therefore be wrong. Further drafting is needed on attribution, followed by assessment of the two remaining states.
 
 ---
 
@@ -85,7 +91,7 @@ Final round output: *"CONSENSUS ASSESSMENT: Likely. Both parties have moved towa
 | Example | Acceptance | Substance | Red lines | Gratuitous dilution | Other flags |
 |---|---|---|---|---|---|
 | Feasibility control — successful consensus | 7/7 possible | Must clear SG floor | 0 | n/a | Consensus feasible |
-| A — Strong near-consensus compromise | 6/7 | High | 1 (Osnesal) | None | — |
+| A — Strong near-consensus compromise | 4 meet stated constraints; 1 rejects; 2 not fully assessed | Requires calculation | 1 (Osnesal) | Requires round-by-round assessment | — |
 | B — Bad compromise | 3 meet stated constraints; 2 reject; 2 not fully assessed; SG fails | Very low | Osnesal and Wetreysau; SG mandate also fails | Requires round-by-round assessment | — ||
 | C — Strong but non-consensual | 4/7 | Very high | 2 (Ogrua, Ogrea) | None | — |
 | D — Hidden red line | Not fully assessed | Low–moderate | Pepryae violation identified; other states not fully assessed | Not assessed | — |
