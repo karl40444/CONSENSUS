@@ -20,6 +20,11 @@ policy_dimensions:
       3: "Explicit attribution to Sastos security forces"
       4: "Explicit attribution with reference to command responsibility"
       5: "Explicit attribution naming state authorities directly and unambiguously"
+    scoring_note: >
+      Practitioner ruling (Oct 2026): naming the security forces of Sastos is
+      explicit attribution (level 3) even when presented as what reports
+      state, e.g. "reports that security forces in the Republic of Sastos
+      have used lethal force". Reporting language does not make it ambiguous.
   - id: condemnation
     label: "Condemnation strength"
     scale:
@@ -56,6 +61,13 @@ policy_dimensions:
       3: "Calls for a transparent domestic investigation with international observation"
       4: "Calls for an independent international investigation"
       5: "Calls for an independent international investigation with a defined mandate and timeline"
+    scoring_note: >
+      Practitioner ruling (Oct 2026): an investigation established or
+      conducted by the authorities of Sastos is domestic, however it is
+      described ("independent", "impartial", "transparent"). It scores 2,
+      or 3 only if international observation of that investigation is
+      explicitly provided for. Levels 4 and 5 require an investigation that
+      is itself international.
   - id: sanctions
     label: "Sanctions or further measures"
     scale:
