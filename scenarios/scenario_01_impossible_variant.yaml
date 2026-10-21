@@ -39,6 +39,19 @@ overrides:
       attribution would trigger retaliation against Ogrua's economic
       interests in the rare-earth sector.
 
+# Machine-readable versions of the two overrides above, so that the
+# automated acceptance check sees the conflict. Without these, a scorer
+# reading only the numeric minimum/maximum fields inherited from
+# scenario_01.yaml would still use attribution >= 3 and <= 3, and would
+# wrongly find the variant solvable.
+numeric_overrides:
+  Osnesal:
+    minimum:
+      attribution: 4
+  Ogrua:
+    maximum:
+      attribution: 2
+
 conflict_summary: >
   Osnesal's amended red line requires attribution >= 4. Ogrua's amended red
   line requires attribution <= 2. No value on the 0-5 scale satisfies both.

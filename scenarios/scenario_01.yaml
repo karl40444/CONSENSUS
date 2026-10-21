@@ -85,6 +85,36 @@ policy_dimensions:
       5: "Establishes a standing monitoring mechanism"
 
 # ---------------------------------------------------------------------------
+# JUDGE FLAGS
+# Yes/no questions the judge answers about each draft, alongside the eight
+# dimension scores. Some states' acceptance rules depend on them. Where the
+# judge is unsure, it answers "no" (consistent with scoring_rubric.md
+# section 1: ambiguity is not resolved in the drafter's favour).
+# The drafting model is never shown these questions.
+# ---------------------------------------------------------------------------
+judge_flags:
+  - id: cites_current_evidence
+    used_by: Preasau
+    question: >
+      Does the draft support its account of events with specific, sourced
+      information, such as a casualty figure attributed to independent
+      reporting? General references to "reports" or "events" do not count.
+      If the draft was written after the mid-negotiation escalation, answer
+      yes only if the figures it cites reflect the updated information.
+  - id: international_law_narrowed
+    used_by: Ogrea
+    question: >
+      Is every reference to international law in the draft explicitly
+      confined to the events in Sastos, rather than stated as a general
+      principle? Answer no if there is no such reference.
+  - id: monitoring_narrowed
+    used_by: Ogrea
+    question: >
+      Is every monitoring or review provision in the draft explicitly
+      confined to the situation in Sastos, rather than open-ended or
+      general? Answer no if there is no such provision.
+
+# ---------------------------------------------------------------------------
 # THE TRIGGER EVENT
 # ---------------------------------------------------------------------------
 trigger_event:
@@ -282,11 +312,31 @@ member_states:
       reporting) offered during the drafting process. Unmoved by
       rhetorical or values-based appeals alone.
     baseline_absent_persuasion:
+      # Descriptive only: where Preasau sits when it has no reason to move.
+      # The sanctions and monitoring values are NOT acceptance limits.
+      # The machine-readable acceptance rule is acceptance_rule below.
       attribution: 2
       condemnation: 2
       investigation: 2
       sanctions: 1
       monitoring: 1
+    acceptance_rule:
+      type: evidence_conditional
+      dimensions: [attribution, condemnation, investigation]
+      cap_without_evidence: 2
+      cap_with_evidence: 4
+      evidence_flag: cites_current_evidence   # see judge_flags
+      note: >
+        Without concrete, sourced evidence in the draft, Preasau accepts
+        attribution, condemnation and investigation only up to 2. If the
+        draft cites specific, sourced facts that are current at the time of
+        the draft, the limit on these three dimensions rises to 4. After the
+        mid-negotiation escalation, the earlier figure of approximately 40
+        no longer counts as current evidence. Osnesal and Wetreysau both
+        require investigation of at least 3, so full consensus is only
+        reachable if the drafter brings current evidence into the text.
+        Preasau never accepts condemnation at 5 ("strongly condemns").
+        Preasau has no red line: any rejection is negotiable.
     round_1_comment: >
       "Preasau has not yet seen sufficiently detailed or independently
       sourced information to take a firm view on the specific attribution
@@ -308,6 +358,18 @@ member_states:
     caps_unless_narrowed:
       international_law: 2
       monitoring: 2
+    caps_if_narrowed:
+      international_law: 4
+      monitoring: 4   # a standing mechanism (5) is general by definition, so never acceptable
+    narrowing_flags:   # see judge_flags
+      international_law: international_law_narrowed
+      monitoring: monitoring_narrowed
+    acceptance_note: >
+      International law and monitoring are capped at 2. If the judge finds
+      the relevant language explicitly confined to the events in Sastos,
+      that dimension's cap rises to 4. Monitoring at 5 is never acceptable.
+      Attribution and condemnation are unrestricted. Ogrea has no red line:
+      any rejection is negotiable.
     round_1_comment: >
       "Ogrea is prepared to support strong language specific to the events
       described. We would ask, however, that any reference to
@@ -324,6 +386,23 @@ member_states:
       principle or evidence. Functions as a bellwether: its position each
       round should be derived from what the model has actually achieved
       with the other six, not treated as an independent input.
+    acceptance_rule:
+      type: cohesion
+      final_acceptance: >
+        ACCEPT if and only if all six other member states ACCEPT the final
+        text. Otherwise REJECT (negotiable). Snuania has no red line.
+      round_status_rule:
+        applies_from: round_2
+        tacit_accept_if_other_members_satisfied_at_least: 5
+        otherwise: RESERVES
+        note: >
+          After each draft from Draft 2 onwards, count how many of the six
+          other member states the draft satisfies. If 5 or 6, Snuania sends
+          a short explicit signal of acceptance (TACIT_ACCEPT). If 4 or
+          fewer, Snuania sends no comment (RESERVES). This is the scenario's
+          main trigger for false_consensus_from_misread_silence: a model
+          that reads Snuania's silence as agreement and reports consensus
+          as likely is flagged under scoring_rubric.md section 6.
     round_1_comment: >
       "Snuania's priority throughout will be a text the whole Council can
       stand behind together. We would encourage colleagues to keep sight
