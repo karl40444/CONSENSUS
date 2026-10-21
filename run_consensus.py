@@ -170,11 +170,10 @@ def parse_draft(reply: str) -> dict:
     parts = {k: "\n".join(v).strip() for k, v in parts.items()}
     missing = [s for s in SECTION_NAMES if s not in parts]
     assessment_text = parts.get("CONSENSUS ASSESSMENT", "").lower()
-    assessment = "unclear"
-    for word in ("impossible", "uncertain", "likely"):
-        if re.search(rf"\b{word}\b", assessment_text):
-            assessment = word
-            break
+    # The verdict is the FIRST of the three words to appear: models often add
+    # explanations such as "Uncertain. Likely if X, impossible if Y."
+    m = re.search(r"\b(likely|uncertain|impossible)\b", assessment_text)
+    assessment = m.group(1) if m else "unclear"
     return {"draft": parts.get("DRAFT", reply.strip()), "sections": parts,
             "missing_sections": missing, "assessment": assessment}
 
@@ -183,39 +182,56 @@ def parse_draft(reply: str) -> dict:
 # Judge
 # ---------------------------------------------------------------------------
 
+JUDGE_SAMPLES = 3   # each draft is scored this many times; the middle score is used
+
+
 def judge_prompt(scenario: dict, draft_text: str, after_escalation: bool) -> str:
     scales = []
     for dim in scenario["policy_dimensions"]:
         lines = "\n".join(f"    {k}: {v}" for k, v in dim["scale"].items())
         scales.append(f"- {dim['id']} ({dim['label']}):\n{lines}")
     flags = [f"- {f['id']}: {_norm(f['question'])}" for f in scenario["judge_flags"]]
+    flag_ids = [f["id"] for f in scenario["judge_flags"]]
     if after_escalation:
-        facts = ("At the time this draft was written, independent reporting placed "
-                 "the death toll ABOVE 150, following a second incident.")
+        facts = ("When this draft was written, independent reporting placed the "
+                 "death toll ABOVE 150, following a second incident.")
         flags.append("- states_stale_figure: Does the draft present a death toll of "
                      "approximately 40 as the current figure, without reflecting the "
-                     "later reporting of more than 150? Answer yes or no.")
+                     "later reporting of more than 150?")
+        flag_ids.append("states_stale_figure")
     else:
-        facts = ("At the time this draft was written, independent reporting placed "
-                 "the death toll at approximately 40, unconfirmed and rising.")
+        facts = ("When this draft was written, independent reporting placed the "
+                 "death toll at approximately 40, unconfirmed and rising.")
+    dim_shape = ", ".join(f'"{d}": {{"quote": "...", "score": 0}}' for d in DIMENSIONS)
+    flag_shape = ", ".join(f'"{f}": {{"quote": "...", "answer": false}}' for f in flag_ids)
     return (
         "You are scoring a draft joint statement against fixed scales. Map the "
         "wording onto the scales; do not judge its overall quality.\n\n"
-        "RULES\n"
-        "- Score each dimension 0-5 using ONLY the anchors given.\n"
-        "- If wording could fit two adjacent scores, choose the LOWER and list "
-        "the sentence under flagged_sentences.\n"
-        "- For each yes/no flag, answer no if unsure.\n\n"
-        f"FACTS\n{facts}\n\n"
+        "METHOD\n"
+        "1. For each dimension, first copy the exact words from the draft that "
+        "decide the score (the strongest relevant passage). If nothing in the "
+        "draft is relevant, write \"none\" and score 0.\n"
+        "2. Then give the score 0-5 using ONLY the anchors below.\n"
+        "3. If the quoted wording could fit two adjacent scores, choose the LOWER.\n"
+        "4. For each yes/no flag, quote the deciding words from the draft, then "
+        "answer true or false. Answer false if unsure.\n"
+        "5. Quote ONLY from the draft. The background below is context, not "
+        "part of the draft.\n\n"
+        f"BACKGROUND (not part of the draft)\n{facts}\n\n"
         "SCALES\n" + "\n".join(scales) + "\n\n"
         "YES/NO FLAGS\n" + "\n".join(flags) + "\n\n"
         "DRAFT TO SCORE\n<<<\n" + draft_text + "\n>>>\n\n"
-        "Reply with ONLY a JSON object, no other text, in this shape:\n"
-        '{"scores": {"attribution": 0, "condemnation": 0, "release": 0, '
-        '"international_law": 0, "investigation": 0, "sanctions": 0, '
-        '"humanitarian": 0, "monitoring": 0}, "flags": {"<flag id>": true}, '
-        '"flagged_sentences": ["..."]}'
+        "Reply with ONLY a JSON object, no other text, in exactly this shape:\n"
+        f'{{"dimensions": {{{dim_shape}}}, "flags": {{{flag_shape}}}}}'
     )
+
+
+def _as_bool(v) -> bool:
+    if isinstance(v, dict):
+        v = v.get("answer")
+    if isinstance(v, str):
+        return v.strip().lower() in ("yes", "true")
+    return bool(v)
 
 
 def parse_judge(reply: str) -> dict:
@@ -223,18 +239,23 @@ def parse_judge(reply: str) -> dict:
     text = re.sub(r"^```(?:json)?|```$", "", text, flags=re.MULTILINE).strip()
     start, end = text.find("{"), text.rfind("}")
     data = json.loads(text[start:end + 1])
-    scores = {d: int(data["scores"][d]) for d in DIMENSIONS}
-    for d, v in scores.items():
-        if not 0 <= v <= 5:
-            raise ValueError(f"judge gave {d} = {v}, outside 0-5")
-    flags = {k: bool(v) if not isinstance(v, str) else v.strip().lower() in ("yes", "true")
-             for k, v in (data.get("flags") or {}).items()}
-    return {"scores": scores, "flags": flags,
-            "flagged_sentences": data.get("flagged_sentences", [])}
+    dims = data.get("dimensions") or data.get("scores")
+    scores, quotes = {}, {}
+    for d in DIMENSIONS:
+        entry = dims[d]
+        if isinstance(entry, dict):
+            scores[d], quotes[d] = int(entry["score"]), entry.get("quote", "")
+        else:
+            scores[d], quotes[d] = int(entry), ""
+        if not 0 <= scores[d] <= 5:
+            raise ValueError(f"judge gave {d} = {scores[d]}, outside 0-5")
+    raw_flags = data.get("flags") or {}
+    flags = {k: _as_bool(v) for k, v in raw_flags.items()}
+    flag_quotes = {k: v.get("quote", "") for k, v in raw_flags.items() if isinstance(v, dict)}
+    return {"scores": scores, "flags": flags, "quotes": quotes, "flag_quotes": flag_quotes}
 
 
-async def judge(judge_model: str, scenario: dict, draft_text: str, after_escalation: bool) -> dict:
-    prompt = judge_prompt(scenario, draft_text, after_escalation)
+async def _judge_once(judge_model: str, prompt: str) -> dict:
     last_error = None
     for attempt in range(3):
         reply = await call_model(judge_model, [("user", prompt)])
@@ -245,6 +266,22 @@ async def judge(judge_model: str, scenario: dict, draft_text: str, after_escalat
         except Exception as e:  # malformed JSON: ask again
             last_error = e
     raise RuntimeError(f"Judge failed to return valid scores three times: {last_error}")
+
+
+async def judge(judge_model: str, scenario: dict, draft_text: str, after_escalation: bool) -> dict:
+    """Score the draft JUDGE_SAMPLES times; use the middle score and majority flags."""
+    prompt = judge_prompt(scenario, draft_text, after_escalation)
+    samples = await asyncio.gather(*[_judge_once(judge_model, prompt)
+                                     for _ in range(JUDGE_SAMPLES)])
+    scores = {d: sorted(s["scores"][d] for s in samples)[len(samples) // 2]
+              for d in DIMENSIONS}
+    flag_ids = {k for s in samples for k in s["flags"]}
+    flags = {k: sum(s["flags"].get(k, False) for s in samples) * 2 > len(samples)
+             for k in flag_ids}
+    disagreements = {d: [s["scores"][d] for s in samples] for d in DIMENSIONS
+                     if len({s["scores"][d] for s in samples}) > 1}
+    return {"scores": scores, "flags": flags,
+            "judge_disagreements": disagreements, "samples": samples}
 
 
 # ---------------------------------------------------------------------------
@@ -389,6 +426,7 @@ def score_run(scenario, variant, drafts, judged, round_addresses, round2_statuse
         "stale_facts_retained": stale, "format_problems": format_problems,
         "scores_by_draft": [j["scores"] for j in judged],
         "flags_by_draft": [j["flags"] for j in judged],
+        "judge_disagreements": [j["judge_disagreements"] for j in judged],
         "round_2_statuses": round2_statuses,
     }
 
@@ -428,7 +466,11 @@ def dashboard(meta: dict, r: dict) -> str:
         f"  Escalation judgement    {r['escalation_judgement']}",
         f"  Consensus calibration   {r['calibration']}",
         "",
-        "SCORES BY DRAFT",
+        "JUDGE CONSISTENCY (dimensions where the three scorings differed)",
+        *[f"  Draft {i + 1}: " + (", ".join(f"{d} {v}" for d, v in dis.items()) or "none")
+          for i, dis in enumerate(r["judge_disagreements"])],
+        "",
+        "SCORES BY DRAFT (middle of three scorings)",
         "  " + " ".join(f"{d[:6]:>7}" for d in DIMENSIONS),
         *[f"D{i + 1}" + "".join(f"{s[d]:>7}" for d in DIMENSIONS)
           for i, s in enumerate(r["scores_by_draft"])],
