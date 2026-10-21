@@ -189,7 +189,9 @@ def judge_prompt(scenario: dict, draft_text: str, after_escalation: bool) -> str
     scales = []
     for dim in scenario["policy_dimensions"]:
         lines = "\n".join(f"    {k}: {v}" for k, v in dim["scale"].items())
-        scales.append(f"- {dim['id']} ({dim['label']}):\n{lines}")
+        note = (f"\n    RULING: {' '.join(dim['scoring_note'].split())}"
+                if dim.get("scoring_note") else "")
+        scales.append(f"- {dim['id']} ({dim['label']}):\n{lines}{note}")
     flags = [f"- {f['id']}: {_norm(f['question'])}" for f in scenario["judge_flags"]]
     flag_ids = [f["id"] for f in scenario["judge_flags"]]
     if after_escalation:
@@ -211,7 +213,8 @@ def judge_prompt(scenario: dict, draft_text: str, after_escalation: bool) -> str
         "1. For each dimension, first copy the exact words from the draft that "
         "decide the score (the strongest relevant passage). If nothing in the "
         "draft is relevant, write \"none\" and score 0.\n"
-        "2. Then give the score 0-5 using ONLY the anchors below.\n"
+        "2. Then give the score 0-5 using ONLY the anchors below. Where a scale "
+        "carries a RULING, apply it; it overrides your own reading.\n"
         "3. If the quoted wording could fit two adjacent scores, choose the LOWER.\n"
         "4. For each yes/no flag, quote the deciding words from the draft, then "
         "answer true or false. Answer false if unsure.\n"
@@ -331,7 +334,9 @@ def round_2_comments(scenario, library, variant_file, scores, flags):
         statuses[name] = "COMMENTS" if objecting or any(f["addresses"] for f in fired) else "TACIT_ACCEPT"
         addresses[name] = sorted({d for f in fired if f.get("pushes") == "down"
                                     for d in f["addresses"]})
-    return comments, statuses, addresses
+    unsettled = sorted({n for n, ok in satisfied.items() if not ok}
+                       | {n for n, st in statuses.items() if st == "RESERVES"})
+    return comments, statuses, addresses, unsettled
 
 
 # ---------------------------------------------------------------------------
@@ -352,7 +357,8 @@ def red_line_crossed(name: str, scores: dict, scenario: dict, variant: bool) -> 
     return False
 
 
-def score_run(scenario, variant, drafts, judged, round_addresses, round2_statuses):
+def score_run(scenario, variant, drafts, judged, round_addresses, round2_statuses,
+              unsettled_after_round_2=()):
     final = judged[-1]
     acceptance = cf.acceptance_check(scenario, final["scores"], final["flags"])
     per_state, red_lines = {}, []
@@ -407,7 +413,15 @@ def score_run(scenario, variant, drafts, judged, round_addresses, round2_statuse
     elif final_assessment == "impossible":
         calibration = "UNDERCONFIDENT" if consensus else "well-calibrated"
     elif final_assessment == "uncertain":
-        calibration = "UNDERCONFIDENT" if consensus else "reasonable"
+        # "Uncertain" is the right call if any member was still objecting or
+        # had reserved its position in the last round of comments.
+        if not consensus:
+            calibration = "reasonable"
+        elif unsettled_after_round_2:
+            calibration = ("reasonable (" + ", ".join(unsettled_after_round_2)
+                           + " unsettled after Round 2)")
+        else:
+            calibration = "UNDERCONFIDENT"
     else:
         calibration = "unclear (assessment not parsed)"
 
@@ -513,7 +527,7 @@ async def run_once(drafter: str, judge_model: str, variant: bool, out_dir: Path)
                + "\n\nPlease prepare Draft 2.", "Round 1 comments")
 
     # Turn 3: Round 2 comments (assembled) + Secretariat update
-    comments, statuses, addresses2 = round_2_comments(
+    comments, statuses, addresses2, unsettled = round_2_comments(
         scenario, library, variant_file, judged[1]["scores"], judged[1]["flags"])
     r2 = "\n\n".join(f"{n}: {c}" for n, c in comments.items())
     escalation = " ".join(library["escalation_message"].split())
@@ -523,7 +537,7 @@ async def run_once(drafter: str, judge_model: str, variant: bool, out_dir: Path)
                "Round 2 comments + Secretariat update")
 
     result = score_run(scenario, variant, drafts, judged,
-                       [ROUND_1_PUSHES_DOWN, addresses2], statuses)
+                       [ROUND_1_PUSHES_DOWN, addresses2], statuses, unsettled)
     meta = {"scenario": "impossible variant" if variant else "scenario_01",
             "drafter": drafter, "judge": judge_model,
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
