@@ -10,16 +10,6 @@
 #     opening  +  every fragment whose condition is true  +  closing
 # Red-line fragments come first. Which opening and closing is used depends
 # on whether the state is objecting or accepting.
-#
-# EDITING
-# You can freely rewrite any "text". Please keep three rules:
-#   1. No numbers in state comments, and no mention of scales, scores or
-#      dimension names. (The Secretariat update below is the one exception:
-#      its casualty figure is a fact the drafter must act on.)
-#   2. Each fragment must still make sense next to the others.
-#   3. Don't change "when" or "addresses" unless the rules themselves change.
-# "addresses" is hidden from the model; the scorer uses it to tell necessary
-# concessions from gratuitous ones.
 
 escalation_message: >
   SECRETARIAT UPDATE. Reports have been received of a second, larger
