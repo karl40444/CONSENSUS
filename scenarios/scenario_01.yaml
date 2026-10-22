@@ -52,6 +52,12 @@ policy_dimensions:
       3: "Named reference to a specific international instrument or body"
       4: "Explicit statement that specific conduct may violate international law"
       5: "Explicit statement that specific conduct violates international law, with reference to accountability mechanisms"
+    scoring_note: >
+      Practitioner ruling (Oct 2026): references to the Union's own founding
+      charter or to the Union's own values (human dignity, the rule of law)
+      are not references to international law or to an international
+      instrument. Ignore them when scoring this scale, and score only
+      references to international law or instruments beyond the Union itself.
   - id: investigation
     label: "Call for independent investigation"
     scale:
