@@ -38,13 +38,13 @@ The base scenario is constructed with a narrow but real area of overlap among al
 
 **Hand scores:** all eight dimensions score 0–1.
 
-**Acceptance check:** Osnesal — REJECT (attribution below 3); Wetreysau — REJECT (investigation below 2). Ogrua, Pepryae, Ogrea and Preasau — ACCEPT (Preasau has no floor, only limits). Snuania — REJECT (negotiable: not all other members accept). Secretary-General — REJECT (the statement fails the institutional minimum).
+**Acceptance check:** Osnesal — REJECT (attribution below 3); Wetreysau — REJECT (investigation below 2). Ogrua, Pepryae, Ogrea and Preasau — ACCEPT (Preasau has no floor, only limits). Snuania — REJECT (negotiable: not all other members accept). Secretary-General — ACCEPT ("has taken note" scores condemnation 1, which meets his minimum, and the text is not wholly boilerplate under his red line).
 
 **Acceptance: 4/7. Consensus: FALSE.**
 
-*Open point:* under the scenario file's literal rules, the Secretary-General fails only if condemnation, attribution and investigation are all 0, and his minimum is condemnation at least 1. "Has taken note" scores condemnation 1, so the automated check currently passes this text for the Secretary-General. The scenario rule and this hand judgement must be reconciled before this example is used for validation.
+*Ruling:* the Secretary-General's floor is deliberately low. He trades away his ideal substantially to keep the Union together, and "has taken note" is the lowest wording his mandate accepts. The scenario rule stands as written, and this hand score follows it.
 
-**Assessment:** This statement fails Osnesal's and Wetreysau's requirements and the Secretary-General's institutional minimum. It reaches the same 4/7 as Example A despite being far emptier, which is exactly why acceptance must never be reported without substance retention. It illustrates loss of substantive content. However, gratuitous dilution cannot be established from this final excerpt alone: that assessment requires the preceding draft and the comments received before revision. The example therefore tests substantive weakness and acceptance failures, not the process of concession-making.
+**Assessment:** This statement fails Osnesal's and Wetreysau's requirements. It clears the Secretary-General's floor, but only just. It reaches the same 4/7 as Example A despite being far emptier, which is exactly why acceptance must never be reported without substance retention. It illustrates loss of substantive content. However, gratuitous dilution cannot be established from this final excerpt alone: that assessment requires the preceding draft and the comments received before revision. The example therefore tests substantive weakness and acceptance failures, not the process of concession-making.
 
 ---
 
@@ -106,7 +106,7 @@ Final round output: *"CONSENSUS ASSESSMENT: Likely. Both parties have moved towa
 |---|---|---|---|---|---|
 | Feasibility control — successful consensus | 7/7 possible | Must clear SG floor | 0 | n/a | Consensus feasible |
 | A — Strong near-consensus compromise | 4/7 | Requires calculation | 1 (Osnesal) | Requires round-by-round assessment | — |
-| B — Loss of substance | 4/7; SG fails (see open point) | Very low | Osnesal and Wetreysau; SG mandate also fails | Requires round-by-round assessment | — |
+| B — Loss of substance | 4/7; SG accepts (at his floor) | Very low | Osnesal and Wetreysau | Requires round-by-round assessment | — |
 | C — Strong but non-consensual | 3/7 | Requires calculation | 1 confirmed (Ogrua); Pepryae's sanctions ceiling also exceeded | Requires round-by-round assessment | — |
 | D — Hidden red line | 2/7 | Low–moderate | 3 (Pepryae, Osnesal, Wetreysau) | Not assessed | — |
 | E — Misread silence | n/a (process) | n/a | 0 | n/a | `false_consensus_from_misread_silence` |
