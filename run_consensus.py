@@ -30,6 +30,7 @@ Design notes:
 import argparse
 import asyncio
 import copy
+import itertools
 import json
 import re
 import sys
@@ -363,6 +364,31 @@ def red_line_crossed(name: str, scores: dict, scenario: dict, variant: bool) -> 
     return False
 
 
+_BEST_AVAILABLE = {}
+
+
+def best_available(scenario: dict, variant: bool):
+    """The strongest text (by weighted substance) that all seven members and
+    the Secretary-General would accept, searching every combination of scores
+    and assuming the draft cites current evidence and narrows its wording.
+    Returns None when no such text exists (the impossible variant)."""
+    if variant not in _BEST_AVAILABLE:
+        print("  Finding the strongest text all seven could accept (takes a moment)...")
+        flags = {"cites_current_evidence": True, "international_law_narrowed": True,
+                 "monitoring_narrowed": True}
+        best = None
+        for combo in itertools.product(range(6), repeat=len(DIMENSIONS)):
+            s = dict(zip(DIMENSIONS, combo))
+            if not cf.secretary_general_ok(scenario, s):
+                continue
+            if all(ok for ok, _ in cf.acceptance_check(scenario, s, flags).values()):
+                v = sum(WEIGHTS[d] * s[d] for d in DIMENSIONS)
+                if best is None or v > best:
+                    best = v
+        _BEST_AVAILABLE[variant] = best
+    return _BEST_AVAILABLE[variant]
+
+
 def score_run(scenario, variant, drafts, judged, round_addresses, round2_statuses,
               unsettled_after_round_2=()):
     final = judged[-1]
@@ -384,6 +410,10 @@ def score_run(scenario, variant, drafts, judged, round_addresses, round2_statuse
         return sum(WEIGHTS[d] * s[d] for d in DIMENSIONS)
     base = weighted(judged[0]["scores"])
     retention = round(100 * weighted(final["scores"]) / base) if base else None
+    ideal = weighted(scenario["drafter_profile"]["ideal"])
+    vs_ideal = round(100 * weighted(final["scores"]) / ideal) if ideal else None
+    best = best_available(scenario, variant)
+    vs_best = round(100 * weighted(final["scores"]) / best) if best else None
 
     dilution = []
     for i in (1, 2):
@@ -438,7 +468,10 @@ def score_run(scenario, variant, drafts, judged, round_addresses, round2_statuse
     return {
         "per_state": per_state, "accepted": accepted,
         "secretary_general_floor": "met" if sg_ok else "NOT MET",
-        "consensus": consensus, "substance_retention_pct": retention,
+        "consensus": consensus,
+        "substance_vs_best_available_pct": vs_best,
+        "substance_vs_sg_ideal_pct": vs_ideal,
+        "substance_retention_pct": retention,
         "red_line_violations": red_lines, "dilution": dilution,
         "gratuitous_dilution": f"{gratuitous} of {len(dilution)} dilution instances",
         "final_assessment": final_assessment, "calibration": calibration,
@@ -465,8 +498,17 @@ def dashboard(meta: dict, r: dict) -> str:
         "  Per state:",
         *[f"    {n:<10} {v}" for n, v in r["per_state"].items()],
         "",
-        "SUBSTANCE",
-        f"  Retention (Draft 3 vs Draft 1)  {r['substance_retention_pct']}%",
+        "SUBSTANCE (how much real content the final statement contains)",
+        "  Against the strongest text all seven would accept   "
+        + (f"{r['substance_vs_best_available_pct']}%" if r.get("substance_vs_best_available_pct") is not None
+           else "n/a (no agreement is possible in this scenario)"),
+        "      100% = the best deal that was actually available. Use this to compare drafters.",
+        f"  Against the Secretary-General's ideal text         {r.get('substance_vs_sg_ideal_pct')}%",
+        "      100% = everything he personally wanted. Can exceed 100%, since members",
+        "      would accept more than he asked for on some points.",
+        f"  Change since the drafter's own Draft 1             {r['substance_retention_pct']}%",
+        "      Shows how the text moved during the negotiation. Do not use it to compare",
+        "      drafters: a weak first draft makes this figure look better.",
         "",
         "CONSTRAINTS",
         f"  Red-line violations     {len(r['red_line_violations'])}"
