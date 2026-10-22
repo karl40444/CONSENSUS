@@ -8,8 +8,6 @@ This is a validation exercise, not a model comparison. Each example is an illust
 
 The scenario files define the authoritative acceptance conditions and scoring anchors. This document illustrates their application. Any disagreement between a worked example and its scenario must be resolved before the example is used to validate automated scoring.
 
-Where a state's decision rule has not yet been formalised, mark its acceptance as "not fully assessed" rather than assuming acceptance. Only report a complete acceptance total after all seven states have been assessed.
-
 ---
 
 ## Feasibility control — successful consensus is possible
