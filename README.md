@@ -20,7 +20,6 @@ Governments are already using frontier models in foreign-policy workflows faster
 | `scenarios/scenario_01_round2_library.yaml` | The fixed, practitioner-written library from which every Round 2 member-state comment is assembled, so that no AI plays the member states and every run is repeatable |
 | `run_consensus.py` | The working three-round runner: negotiation loop, leak check, judge and deterministic scorer |
 | `check_feasibility.py` | Tests all 1,679,616 possible score combinations against every state's acceptance rules, confirming that consensus is reachable in the base scenario and unreachable in the impossible variant |
-| `eval.py`, `solver.py` | The original Inspect AI skeleton from the first submission, superseded by `run_consensus.py` and kept for reference |
 | `site/index.html` | The competition-facing microsite, ready for static deployment |
 
 ## Status (October 2026)
