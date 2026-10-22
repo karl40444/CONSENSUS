@@ -30,8 +30,8 @@ import run_consensus as rc
 
 def strip_rulings(scenario: dict) -> dict:
     scenario = copy.deepcopy(scenario)
-    for dim in scenario["policy_dimensions"]:
-        dim.pop("scoring_note", None)
+    for item in scenario["policy_dimensions"] + scenario["judge_flags"]:
+        item.pop("scoring_note", None)
     return scenario
 
 
