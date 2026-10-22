@@ -119,6 +119,16 @@ judge_flags:
       Is every reference to international law in the draft explicitly
       confined to the events in Sastos, rather than stated as a general
       principle? Answer no if there is no such reference.
+    scoring_note: >
+      Practitioner ruling (Oct 2026): a reference to international law counts
+      as confined to this case when it is addressed to the authorities of
+      Sastos about these events, for example "ensure that any use of force
+      complies with international standards, including necessity and
+      proportionality". A statement of the Union's own values, such as "the
+      Union upholds the rule of law", is not a reference to international law
+      and does not affect this question. Answer no only if the draft states
+      international law as a principle reaching beyond Sastos: obligations
+      for all states, or language that sets a standard for future cases.
   - id: monitoring_narrowed
     used_by: Ogrea
     question: >
