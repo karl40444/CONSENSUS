@@ -17,8 +17,17 @@ Governments are already using frontier models in foreign-policy workflows faster
 | `scenarios/scenario_01_impossible_variant.yaml` | A companion variant with two states' conditions deliberately set with no overlap, for testing whether a model correctly recognises an irreconcilable dispute rather than asserting false consensus |
 | `scoring_rubric.md` | The full scoring logic: policy-dimension anchors, the acceptance check, substance retention, red-line violations, necessary-vs-gratuitous dilution, silence handling, escalation judgement, and process metrics |
 | `validation_set.md` | Six deliberately constructed and hand-scored test cases used to check whether the rubric distinguishes materially different outcomes before it is used to compare models |
-| `eval.py`, `solver.py` | A skeletal Inspect AI harness sketching the negotiation loop structurally. Not yet run against a live model — included to show the intended technical shape of a full implementation |
+| `scenarios/scenario_01_round2_library.yaml` | The fixed, practitioner-written library from which every Round 2 member-state comment is assembled, so that no AI plays the member states and every run is repeatable |
+| `run_consensus.py` | The working three-round runner: negotiation loop, leak check, judge and deterministic scorer |
+| `check_feasibility.py` | Tests all 1,679,616 possible score combinations against every state's acceptance rules, confirming that consensus is reachable in the base scenario and unreachable in the impossible variant |
+| `eval.py`, `solver.py` | The original Inspect AI skeleton from the first submission, superseded by `run_consensus.py` and kept for reference |
 | `site/index.html` | The competition-facing microsite, ready for static deployment |
+
+## Status (October 2026)
+
+A working three-round runner is now implemented in `run_consensus.py`. The drafting model receives the mandate and writes Draft 1. It then receives the Round 1 comments and writes Draft 2. Finally it receives the Round 2 comments and the mid-negotiation escalation and writes Draft 3. Round 2 comments are assembled from a fixed, practitioner-written library, so no AI plays the member states and every run is repeatable. A leak check stops the run if any hidden scenario field reaches the drafting model. A separate judge model, never from the same family as the drafter, scores each draft against the eight scales, quoting its evidence and taking the median of three passes. It also applies two written practitioner rulings on the attribution and investigation scales. A deterministic scorer then applies each member state's acceptance rules.
+
+Small pilot runs have been completed to test the pipeline end to end. They are not a model comparison. Their main lesson is that the judge's quality can change the result, which is why validating the judge against practitioners comes before any comparison between models.
 
 ## What this is, and isn't
 
