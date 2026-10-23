@@ -25,6 +25,12 @@ policy_dimensions:
       explicit attribution (level 3) even when presented as what reports
       state, e.g. "reports that security forces in the Republic of Sastos
       have used lethal force". Reporting language does not make it ambiguous.
+      Second practitioner ruling (Oct 2026): where a draft refers to
+      "security forces" without saying whose, but elsewhere in the statement
+      calls on the authorities of Sastos to halt or account for that use of
+      force, count it as explicit attribution to Sastos's security forces
+      (level 3). Bare "security forces" with no such link to the Sastos
+      authorities remains implicit (level 2).
   - id: condemnation
     label: "Condemnation strength"
     scale:
