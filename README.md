@@ -20,13 +20,44 @@ Governments are already using frontier models in foreign-policy workflows faster
 | `scenarios/scenario_01_round2_library.yaml` | The fixed, practitioner-written library from which every Round 2 member-state comment is assembled, so that no AI plays the member states and every run is repeatable |
 | `run_consensus.py` | The working three-round runner: negotiation loop, leak check, judge and deterministic scorer |
 | `check_feasibility.py` | Tests all 1,679,616 possible score combinations against every state's acceptance rules, confirming that consensus is reachable in the base scenario and unreachable in the impossible variant |
+| `rejudge.py` | Scores a finished run's drafts again with a different judge, with or without the practitioner rulings, to test the judging on its own |
 | `site/index.html` | The competition-facing microsite, ready for static deployment |
 
 ## Status (October 2026)
 
-A working three-round runner is now implemented in `run_consensus.py`. The drafting model receives the mandate and writes Draft 1. It then receives the Round 1 comments and writes Draft 2. Finally it receives the Round 2 comments and the mid-negotiation escalation and writes Draft 3. Round 2 comments are assembled from a fixed, practitioner-written library, so no AI plays the member states and every run is repeatable. A leak check stops the run if any hidden scenario field reaches the drafting model. A separate judge model, never from the same family as the drafter, scores each draft against the eight scales, quoting its evidence and taking the median of three passes. It also applies two written practitioner rulings on the attribution and investigation scales. A deterministic scorer then applies each member state's acceptance rules.
+A working three-round runner is now implemented in `run_consensus.py`. The drafting model receives the mandate and writes Draft 1. It then receives the Round 1 comments and writes Draft 2. Finally it receives the Round 2 comments and the mid-negotiation escalation and writes Draft 3. Round 2 comments are assembled from a fixed, practitioner-written library, so no AI plays the member states and every run is repeatable. A leak check stops the run if any hidden scenario field reaches the drafting model. A separate judge model, never from the same family as the drafter, scores each draft against the eight scales, quoting its evidence and taking the median of three passes. It also applies four written practitioner rulings, on attribution, investigation and international law. A deterministic scorer then applies each member state's acceptance rules.
 
-Small pilot runs have been completed to test the pipeline end to end. They are not a model comparison. Their main lesson is that the judge's quality can change the result, which is why validating the judge against practitioners comes before any comparison between models.
+Early pilot runs showed that the judge's quality can change the result, so the judges were validated against the written practitioner rulings before any comparison between models. `rejudge.py` scores a finished run's drafts again with a different judge, with or without the rulings, so the judging can be tested on its own.
+
+## Results so far (October 2026)
+
+Three leading AI models each drafted the statement five times on each version of the scenario: Claude Opus 5.5 (Anthropic), GPT-6.1 Sol (OpenAI) and Gemini 4 Argon (Google). Each drafter was scored by a judge from a different company, validated against written practitioner rulings.
+
+**Base scenario (agreement is possible)**
+
+| Drafting AI | Share of the best available deal | All seven agreed | Honest final assessment |
+|---|---|---|---|
+| Claude Opus 5.5 | 74% ± 0 | 5 of 5 | 5 of 5 |
+| GPT-6.1 Sol | 71% ± 2 | 5 of 5 | 5 of 5 |
+| Gemini 4 Argon | 53% ± 6 | 1 of 5 | 1 of 5 |
+
+**Impossible variant (no agreement exists)**
+
+| Drafting AI | Named the impasse | Falsely claimed agreement | Substance against the Secretary-General's ideal |
+|---|---|---|---|
+| Claude Opus 5.5 | 5 of 5 | 0 of 5 | 100% ± 7 |
+| GPT-6.1 Sol | 5 of 5 | 0 of 5 | 89% ± 3 |
+| Gemini 4 Argon | 5 of 5 | 0 of 5 | 59% ± 16 |
+
+**Main findings**
+
+- **Who checks the work matters as much as who does it.** In early trials, a weak judge turned a failed negotiation into an apparent success.
+- **The models differ in judgement, not just outcome.** In four of five base runs, Gemini left out the casualty figure that an evidence-driven member had explicitly asked for, yet told the Council that agreement was "likely". A third judge from another company confirmed this reading in every run.
+- **Every model recognised the impossible case,** but Gemini changed sides between runs on the decisive issue and kept far less substance.
+
+**Open question.** Two final texts refer to lethal force by "security forces" without saying whose. Whether that counts as naming those responsible decides whether agreement was reached in those runs. It is being put to a panel of practitioners, and the base-scenario results above may change once it is settled.
+
+**Caveats.** These results come from one invented scenario and five runs per model, with rulings so far from a single practitioner. They show patterns, not a definitive ranking.
 
 ## What this is, and isn't
 
