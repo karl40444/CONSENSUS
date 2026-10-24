@@ -55,9 +55,9 @@ Three leading AI models each drafted the statement five times on each version of
 - **The models differ in judgement, not just outcome.** In four of five base runs, Gemini left out the casualty figure that an evidence-driven member had explicitly asked for, yet told the Council that agreement was "likely". A third judge from another company confirmed this reading in every run.
 - **Every model recognised the impossible case,** but Gemini changed sides between runs on the decisive issue and kept far less substance.
 
-**Practitioner check.** Two final texts refer to lethal force by "security forces" without saying whose, while calling on the Sastos authorities to halt the use of force. Whether that counts as naming those responsible decided whether agreement was reached in those runs, so the question was put to a panel of former diplomats. They read such a text as naming Sastos's forces, which is now a written ruling, and the results above stand. The panel also confirmed the main finding on Gemini's missing casualty figure.
+**Practitioner check.** Two final texts refer to lethal force by "security forces" without saying whose, while calling on the Sastos authorities to halt the use of force. Whether that counts as naming those responsible decided whether agreement was reached in those runs, so the question was put to a panel of three former diplomats. All three read such a text as naming Sastos's forces, which is now a written ruling, and the results above stand. Two of the three also backed the main finding on Gemini's missing casualty figure; the third judged Gemini's text sufficient.
 
-**Caveats.** These results come from one invented scenario and five runs per model. The rulings were written by one practitioner and checked against a small panel of two others, who agreed on most points and split on some. They show patterns, not a definitive ranking.
+**Caveats.** These results come from one invented scenario and five runs per model. The rulings were written by one practitioner and checked against a panel of three others: three of the five rulings were unanimous and the other two had majority support. They show patterns, not a definitive ranking.
 
 ## What this is, and isn't
 
