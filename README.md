@@ -38,11 +38,11 @@ Eleven AI models each drafted the statement five times on each version of the sc
 | Model | Made by | All seven agreed | Share of the best available deal | Honest final assessment |
 |---|---|---|---|---|
 | Claude Opus 5.5 | Anthropic (US) | 5 of 5 | 74% ± 0 | 5 of 5 |
-| DeepSeek V4.1 Flash | DeepSeek (China) | 5 of 5 | 72% ± 3 | 5 of 5 |
 | GPT-6.1 Sol | OpenAI (US) | 5 of 5 | 71% ± 2 | 5 of 5 |
 | Grok 4.7 | xAI (US) | 5 of 5 | 69% ± 7 | 5 of 5 |
 | Muse Spark | Meta (US) | 4 of 5 | 76% ± 3 | 4 of 5 |
 | GLM 5.3 Prime | Zhipu AI (China) | 4 of 5 | 72% ± 6 | 4 of 5 |
+| DeepSeek V4.1 Flash | DeepSeek (China) | 4 of 5 | 72% ± 4 | 4 of 5 |
 | MiniMax M3.1 Flash | MiniMax (China) | 4 of 5 | 71% ± 5 | 4 of 5 |
 | Mistral Large 4 | Mistral (France) | 4 of 5 | 70% ± 7 | 4 of 5 |
 | Qwen 3.8 Max Prime | Alibaba (China) | 3 of 5 | 75% ± 3 | 3 of 5 |
@@ -60,17 +60,17 @@ Eleven AI models each drafted the statement five times on each version of the sc
 | GPT-6.1 Sol | 5 of 5 | 0 | 89% ± 3 |
 | Grok 4.7 | 5 of 5 | 0 | 79% ± 9 |
 | Gemini 4 Argon | 5 of 5 | 0 | 59% ± 16 |
-| Mistral Large 4 | 4 of 5 (one unreadable final draft) | 0 | 89% ± 6 |
-| GLM 5.3 Prime | 0 of 5 (named the clash in four, but called it "uncertain") | 0 | 91% ± 10 |
+| Mistral Large 4 | 4 of 4 completed (one run to be repeated after a technical error) | 0 | 89% ± 6 |
+| GLM 5.3 Prime | 1 of 5 (named the clash in the other four, but called it "uncertain") | 0 | 95% ± 8 |
 | Qwen 3.8 Max Prime | 0 of 5 | 0 | 86% ± 15 |
 | MiniMax M3.1 Flash | 0 of 5 | 3 of 5 | 98% ± 10 |
 
 **Main findings**
 
 - **Who checks the work matters as much as who does it.** In early trials, a weak judge turned a failed negotiation into an apparent success.
-- **Only four of eleven models passed every run:** Claude Opus 5.5, DeepSeek V4.1 Flash, GPT-6.1 Sol and Grok 4.7. One of them is a fast, low-cost model from China, so price and prominence are poor guides.
+- **Only three of eleven models passed every run:** Claude Opus 5.5, GPT-6.1 Sol and Grok 4.7. DeepSeek V4.1 Flash, a fast, low-cost model from China, came within one run of them, so price and prominence are poor guides.
 - **There are two opposite ways to fail when agreement is possible.** Gemini 4 Argon left out the casualty figure an evidence-driven member had asked for, yet told the Council agreement was "likely" in four of five runs. Kimi K3.1 Pro wrote some of the strongest texts in the study but pushed past what two members would accept in three of five runs.
-- **The impossible case separates the models.** MiniMax M3.1 Flash told the Council agreement was "likely" in three of five runs when none was possible. Qwen 3.8 Max Prime never recognised the impasse, and GLM 5.3 Prime named the clash but would not call it impossible.
+- **The impossible case separates the models.** MiniMax M3.1 Flash told the Council agreement was "likely" in three of five runs when none was possible. Qwen 3.8 Max Prime never recognised the impasse, and GLM 5.3 Prime named the clash but called it impossible in only one run.
 
 **Practitioner check.** Two final texts refer to lethal force by "security forces" without saying whose, while calling on the Sastos authorities to halt the use of force. Whether that counts as naming those responsible decided whether agreement was reached in those runs, so the question was put to a panel of three former diplomats. All three read such a text as naming Sastos's forces, which is now a written ruling, and the results above stand. Two of the three also backed the main finding on Gemini's missing casualty figure; the third judged Gemini's text sufficient.
 
