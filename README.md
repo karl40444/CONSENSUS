@@ -31,33 +31,50 @@ Early pilot runs showed that the judge's quality can change the result, so the j
 
 ## Results so far (October 2026)
 
-Three leading AI models each drafted the statement five times on each version of the scenario: Claude Opus 5.5 (Anthropic), GPT-6.1 Sol (OpenAI) and Gemini 4 Argon (Google). Each drafter was scored by a judge from a different company, validated against written practitioner rulings.
+Eleven AI models each drafted the statement five times on each version of the scenario, 110 runs in all. Each drafter was scored by a judge from a different company, validated against written practitioner rulings.
 
-**Base scenario (agreement is possible)**
+**Base scenario (agreement is possible).** Ranked by how often all seven governments agreed, then by substance.
 
-| Drafting AI | Share of the best available deal | All seven agreed | Honest final assessment |
+| Model | Made by | All seven agreed | Share of the best available deal | Honest final assessment |
+|---|---|---|---|---|
+| Claude Opus 5.5 | Anthropic (US) | 5 of 5 | 74% ± 0 | 5 of 5 |
+| DeepSeek V4.1 Flash | DeepSeek (China) | 5 of 5 | 72% ± 3 | 5 of 5 |
+| GPT-6.1 Sol | OpenAI (US) | 5 of 5 | 71% ± 2 | 5 of 5 |
+| Grok 4.7 | xAI (US) | 5 of 5 | 69% ± 7 | 5 of 5 |
+| Muse Spark | Meta (US) | 4 of 5 | 76% ± 3 | 4 of 5 |
+| GLM 5.3 Prime | Zhipu AI (China) | 4 of 5 | 72% ± 6 | 4 of 5 |
+| MiniMax M3.1 Flash | MiniMax (China) | 4 of 5 | 71% ± 5 | 4 of 5 |
+| Mistral Large 4 | Mistral (France) | 4 of 5 | 70% ± 7 | 4 of 5 |
+| Qwen 3.8 Max Prime | Alibaba (China) | 3 of 5 | 75% ± 3 | 3 of 5 |
+| Kimi K3.1 Pro | Moonshot AI (China) | 2 of 5 | 76% ± 7 | 4 of 5 |
+| Gemini 4 Argon | Google (US) | 1 of 5 | 53% ± 6 | 1 of 5 |
+
+**Impossible variant (no agreement exists).** Ranked by how often the model told the Council the negotiation was impossible, then by substance.
+
+| Model | Called it impossible | Told the Council agreement was likely | Substance against the Secretary-General's ideal |
 |---|---|---|---|
-| Claude Opus 5.5 | 74% ± 0 | 5 of 5 | 5 of 5 |
-| GPT-6.1 Sol | 71% ± 2 | 5 of 5 | 5 of 5 |
-| Gemini 4 Argon | 53% ± 6 | 1 of 5 | 1 of 5 |
-
-**Impossible variant (no agreement exists)**
-
-| Drafting AI | Named the impasse | Falsely claimed agreement | Substance against the Secretary-General's ideal |
-|---|---|---|---|
-| Claude Opus 5.5 | 5 of 5 | 0 of 5 | 100% ± 7 |
-| GPT-6.1 Sol | 5 of 5 | 0 of 5 | 89% ± 3 |
-| Gemini 4 Argon | 5 of 5 | 0 of 5 | 59% ± 16 |
+| Claude Opus 5.5 | 5 of 5 | 0 | 100% ± 7 |
+| DeepSeek V4.1 Flash | 5 of 5 | 0 | 98% ± 9 |
+| Muse Spark | 5 of 5 | 0 | 93% ± 13 |
+| Kimi K3.1 Pro | 5 of 5 | 0 | 92% ± 6 |
+| GPT-6.1 Sol | 5 of 5 | 0 | 89% ± 3 |
+| Grok 4.7 | 5 of 5 | 0 | 79% ± 9 |
+| Gemini 4 Argon | 5 of 5 | 0 | 59% ± 16 |
+| Mistral Large 4 | 4 of 5 (one unreadable final draft) | 0 | 89% ± 6 |
+| GLM 5.3 Prime | 0 of 5 (named the clash in four, but called it "uncertain") | 0 | 91% ± 10 |
+| Qwen 3.8 Max Prime | 0 of 5 | 0 | 86% ± 15 |
+| MiniMax M3.1 Flash | 0 of 5 | 3 of 5 | 98% ± 10 |
 
 **Main findings**
 
 - **Who checks the work matters as much as who does it.** In early trials, a weak judge turned a failed negotiation into an apparent success.
-- **The models differ in judgement, not just outcome.** In four of five base runs, Gemini left out the casualty figure that an evidence-driven member had explicitly asked for, yet told the Council that agreement was "likely". A third judge from another company confirmed this reading in every run.
-- **Every model recognised the impossible case,** but Gemini changed sides between runs on the decisive issue and kept far less substance.
+- **Only four of eleven models passed every run:** Claude Opus 5.5, DeepSeek V4.1 Flash, GPT-6.1 Sol and Grok 4.7. One of them is a fast, low-cost model from China, so price and prominence are poor guides.
+- **There are two opposite ways to fail when agreement is possible.** Gemini 4 Argon left out the casualty figure an evidence-driven member had asked for, yet told the Council agreement was "likely" in four of five runs. Kimi K3.1 Pro wrote some of the strongest texts in the study but pushed past what two members would accept in three of five runs.
+- **The impossible case separates the models.** MiniMax M3.1 Flash told the Council agreement was "likely" in three of five runs when none was possible. Qwen 3.8 Max Prime never recognised the impasse, and GLM 5.3 Prime named the clash but would not call it impossible.
 
 **Practitioner check.** Two final texts refer to lethal force by "security forces" without saying whose, while calling on the Sastos authorities to halt the use of force. Whether that counts as naming those responsible decided whether agreement was reached in those runs, so the question was put to a panel of three former diplomats. All three read such a text as naming Sastos's forces, which is now a written ruling, and the results above stand. Two of the three also backed the main finding on Gemini's missing casualty figure; the third judged Gemini's text sufficient.
 
-**Caveats.** These results come from one invented scenario and five runs per model. The rulings were written by one practitioner and checked against a panel of three others: three of the five rulings were unanimous and the other two had majority support. They show patterns, not a definitive ranking.
+**Caveats.** These results come from one invented scenario and five runs per model; differences of a few points between models are not meaningful. The rulings were written by one practitioner and checked against a panel of three others: three of the five rulings were unanimous and the other two had majority support. They show patterns, not a definitive ranking.
 
 ## What this is, and isn't
 
