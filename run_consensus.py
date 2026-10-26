@@ -85,14 +85,37 @@ def load_all(variant: bool):
 # Model calls (Inspect AI handles all three providers and reads .env)
 # ---------------------------------------------------------------------------
 
+MAX_REPLY_TOKENS = 16000   # ample for a draft, even with hidden reasoning
+REPLY_ATTEMPTS = 3         # retries when a model returns an empty or cut-off reply
+RETRY_LOG: list[str] = []  # technical retries in the current run, saved with it
+
+
 async def call_model(model_name: str, messages: list[tuple[str, str]]) -> str:
+    """Ask a model for a reply. If the reply comes back empty, or was cut off
+    by the length limit, ask again (up to REPLY_ATTEMPTS times) and note it in
+    RETRY_LOG. If every attempt fails, the last reply is returned as it is, and
+    the format check records the problem."""
     from inspect_ai.model import (ChatMessageAssistant, ChatMessageSystem,
-                                  ChatMessageUser, get_model)
+                                  ChatMessageUser, GenerateConfig, get_model)
     kinds = {"system": ChatMessageSystem, "user": ChatMessageUser,
              "assistant": ChatMessageAssistant}
     model = get_model(model_name)
-    output = await model.generate([kinds[r](content=t) for r, t in messages])
-    return output.completion
+    config = GenerateConfig(max_tokens=MAX_REPLY_TOKENS)
+    text = ""
+    for attempt in range(1, REPLY_ATTEMPTS + 1):
+        output = await model.generate([kinds[r](content=t) for r, t in messages],
+                                      config=config)
+        text = output.completion or ""
+        stop = output.choices[0].stop_reason if output.choices else None
+        problem = ("an empty reply" if not text.strip()
+                   else "a reply cut off by the length limit"
+                   if stop in ("max_tokens", "model_length") else None)
+        if problem is None:
+            return text
+        note = f"{model_name} returned {problem} (attempt {attempt} of {REPLY_ATTEMPTS})"
+        RETRY_LOG.append(note)
+        print(f"  {note}" + ("; asking again..." if attempt < REPLY_ATTEMPTS else "; giving up."))
+    return text
 
 
 # ---------------------------------------------------------------------------
@@ -489,6 +512,9 @@ def dashboard(meta: dict, r: dict) -> str:
         "CONSENSUS — results",
         f"Scenario: {meta['scenario']}   Drafter: {meta['drafter']}   Judge: {meta['judge']}",
         f"Run: {meta['timestamp']}",
+        *([f"Technical retries: {len(meta['technical_retries'])} "
+           "(empty or cut-off replies that were asked again; see transcript.json)"]
+          if meta.get("technical_retries") else []),
         "",
         "CONSENSUS",
         f"  Acceptance              {r['accepted']}/7",
@@ -545,6 +571,7 @@ def dashboard(meta: dict, r: dict) -> str:
 # ---------------------------------------------------------------------------
 
 async def run_once(drafter: str, judge_model: str, variant: bool, out_dir: Path) -> dict:
+    RETRY_LOG.clear()
     scenario, library, variant_file = load_all(variant)
     hidden = hidden_sentences(scenario)
     conversation = [("system", drafter_system_prompt(scenario))]
@@ -588,7 +615,8 @@ async def run_once(drafter: str, judge_model: str, variant: bool, out_dir: Path)
                        [ROUND_1_PUSHES_DOWN, addresses2], statuses, unsettled)
     meta = {"scenario": "impossible variant" if variant else "scenario_01",
             "drafter": drafter, "judge": judge_model,
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "technical_retries": list(RETRY_LOG)}
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "transcript.json").write_text(
         json.dumps({"meta": meta, "transcript": transcript, "results": result},
@@ -612,7 +640,11 @@ def main():
     except ImportError:
         pass
 
-    if args.drafter.split("/")[0] == args.judge.split("/")[0]:
+    def company(name: str) -> str:
+        parts = name.split("/")
+        return parts[1] if parts[0] == "openrouter" and len(parts) > 2 else parts[0]
+
+    if company(args.drafter) == company(args.judge):
         print("WARNING: drafter and judge are from the same provider. "
               "The protocol recommends a judge from a different provider.\n")
 
@@ -627,6 +659,14 @@ def main():
         except RuntimeError as e:
             print(f"\nRUN STOPPED: {e}")
             sys.exit(1)
+        except Exception as e:
+            # A technical failure (provider error, network, credit limit) ends
+            # this run only; the batch carries on with the next one.
+            out_dir.mkdir(parents=True, exist_ok=True)
+            (out_dir / "error.txt").write_text(f"{type(e).__name__}: {e}\n", encoding="utf-8")
+            print(f"\nRUN FAILED (technical error, details in {out_dir / 'error.txt'}): "
+                  f"{type(e).__name__}: {str(e)[:300]}")
+            continue
         print("\n" + outcome["report"])
         print(f"\nSaved to {out_dir}")
 
