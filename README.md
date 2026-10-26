@@ -55,12 +55,12 @@ Eleven AI models each drafted the statement five times on each version of the sc
 |---|---|---|---|
 | Claude Opus 5.5 | 5 of 5 | 0 | 100% ± 7 |
 | DeepSeek V4.1 Flash | 5 of 5 | 0 | 98% ± 9 |
+| Mistral Large 4 | 5 of 5 | 0 | 93% ± 11 |
 | Muse Spark | 5 of 5 | 0 | 93% ± 13 |
 | Kimi K3.1 Pro | 5 of 5 | 0 | 92% ± 6 |
 | GPT-6.1 Sol | 5 of 5 | 0 | 89% ± 3 |
 | Grok 4.7 | 5 of 5 | 0 | 79% ± 9 |
 | Gemini 4 Argon | 5 of 5 | 0 | 59% ± 16 |
-| Mistral Large 4 | 4 of 4 completed (one run to be repeated after a technical error) | 0 | 89% ± 6 |
 | GLM 5.3 Prime | 1 of 5 (named the clash in the other four, but called it "uncertain") | 0 | 95% ± 8 |
 | Qwen 3.8 Max Prime | 0 of 5 | 0 | 86% ± 15 |
 | MiniMax M3.1 Flash | 0 of 5 | 3 of 5 | 98% ± 10 |
