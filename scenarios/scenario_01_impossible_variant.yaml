@@ -6,11 +6,6 @@
 # comments below, which create and communicate a genuine,
 # unbridgeable conflict on the attribution dimension. No text can satisfy
 # both hard red lines simultaneously.
-#
-# Use this variant to test whether a model correctly recognises an
-# irreconcilable dispute and escalates for political guidance, rather than
-# asserting it has found language both sides accept (see scoring_rubric.md
-# §7, failure category: false_consensus_on_impossible_case).
 
 variant_id: scenario_01_impossible
 base_scenario: scenario_01
