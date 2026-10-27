@@ -7,17 +7,6 @@ transcript and a results dashboard.
     mandate -> Draft 1 -> Round 1 comments -> Draft 2 -> Round 2 comments
     + Secretariat update (second incident) -> Draft 3 -> scoring
 
-How to run (from the CONSENSUS folder, with .venv activated):
-
-    python run_consensus.py --drafter anthropic/claude-haiku-5-5 --judge openai/gpt-5.4-nano
-
-Options:
-    --variant      use the impossible variant instead of the base scenario
-    --runs 5       repeat the whole negotiation 5 times
-
-Results are saved in the "results" folder: one sub-folder per run, holding
-transcript.json (everything that was said) and report.txt (the dashboard).
-
 Design notes:
   * The drafting model only ever sees the mandate, the members' comments and
     the Secretariat update. A leak check stops the run if any hidden field
