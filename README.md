@@ -76,7 +76,7 @@ Eleven AI models each drafted the statement five times on each version of the sc
 
 **Caveats.** These results come from one invented scenario and five runs per model; differences of a few points between models are not meaningful. The rulings were written by one practitioner and checked against a panel of three others: three of the five rulings were unanimous and the other two had majority support. They show patterns, not a definitive ranking.
 
-## What this is, and isn't
+## What this is
 
 This is a protocol and one fully worked scenario with a preliminary, author-scored validation approach — not a completed study, and not a claim about how any specific model performs. No model has been run through this scenario at scale; any single run would in any case be an n of one. `protocol.md` §9 states this explicitly, along with what a properly resourced version of this would require next: additional scenario families, an independently validated LLM-judge, a small human baseline of practitioners, and robustness testing against superficial scenario changes.
 
