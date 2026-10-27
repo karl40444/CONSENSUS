@@ -6,17 +6,6 @@ dimensions (6^8 = 1,679,616 texts) against every member state's acceptance
 rules and the Secretary-General's floor, and reports whether full 7/7
 consensus is reachable.
 
-It also contains acceptance_check(), the deterministic acceptance layer of
-scoring_rubric.md section 2. run_consensus.py reuses it to score every run.
-
-How to run (from the CONSENSUS folder, in PowerShell or any terminal):
-    python check_feasibility.py
-    python check_feasibility.py --variant
-
-Expected result:
-    Base scenario, with current evidence and narrowed wording -> FEASIBLE
-    Base scenario, without evidence                           -> NOT FEASIBLE
-    Impossible variant                                        -> NOT FEASIBLE
 """
 
 import copy
