@@ -5,16 +5,6 @@ Takes the drafts from a finished run (transcript.json) and has a different
 judge score them again. The drafts stay exactly the same, so any change in
 the result comes from the judge alone.
 
-How to run (from the CONSENSUS folder, with .venv activated):
-
-    python rejudge.py results\\<run folder>\\transcript.json --judge openai/gpt-6.1-sol
-    python rejudge.py results\\<run folder>\\transcript.json --judge openai/gpt-6.1-sol --no-rulings
-
---no-rulings hides the practitioner rulings from the judge, to test whether
-it reaches the same reading unaided.
-
-The comparison is printed and saved next to the transcript as
-rejudge_<judge>_<rulings|no-rulings>.txt
 """
 
 import argparse
